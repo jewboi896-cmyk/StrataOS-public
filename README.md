@@ -23,7 +23,7 @@ Anyone can open PRs at any time but as this is a solo project, it may be years b
 # AI Policy
 You can use AI to write code for any part of this project but you must make it known that the code is AI generated. The PR must be tagged with ai-generated. See the labels section for more info. If you use AI for writing anything other than build system scripts or other config stuff, i will probably ignore it as i am responsible for this repo's code and the legality of who owns AI generated code is still a gray area.
 
-# Current Considerations for Viewers
+# Current Considerations for Viewers/Contributors
 This project is in the very early planning stages and thus will not have any code written for it for a few years. im still in college and want to spend my time job/internship prepping. if you come across this repo early on in the dev process, this is why there is not much activity. This is also only the public facing repo, not my private repo for daily work. This will only get updated after certain milestones gets passed.
 
 # Other Possible Additions
