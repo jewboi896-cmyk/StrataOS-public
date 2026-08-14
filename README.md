@@ -1,8 +1,7 @@
 # StrataOS-public
 
 # Intro
-this is a custom OS targeting x86_64 built for myself as well as an educational tool to help beginners understand OS concepts.
-It uses the Limine Bootloader. It will have two sets of documentation: 1.) auto generated API and standard library docs using external tools that scrape the method signatures and compiles complete documentation and 2.) custom made docs geared towards beginners that explain the "why" behind OS concepts. This is planned to be the following: each system/subsystem can be configured to use between 3-5 different implementations of each system/subsystem that can be swapped either via flags passed in via the terminal or you can edit the master Makefile directly. the algorithms will range from as simple as possible to full production level stack. Each system/subsystem will have their own Makefiles that exist to tell the master Makefile how to tell the linker script how to stitch together the final binary. it also exists to keep the preprocessor stuff out of the actual code files and header files (for the applicable languages).
+this is a monolithic style custom OS targeting x86_64 built for myself as well as an educational tool to help beginners understand OS concepts. It uses the Limine Bootloader. It will have two sets of documentation: 1.) auto generated API and standard library docs using external tools that scrape the method signatures and compiles complete documentation and 2.) custom made docs geared towards beginners that explain the "why" behind OS concepts. This is planned to be the following: each system/subsystem can be configured to use between 3-5 different implementations of each system/subsystem that can be swapped either via flags passed in via the terminal or you can edit the master Makefile directly. the algorithms will range from as simple as possible to full production level stack. Each system/subsystem will have their own Makefiles that exist to tell the master Makefile how to tell the linker script how to stitch together the final binary. it also exists to keep the preprocessor stuff out of the actual code files and header files (for the applicable languages).
 
 # Lang Stack
 Core kernel systems/subsystems: pure C
@@ -20,3 +19,6 @@ The build system will be GNU Make
 
 # Current Considerations for Viewers
 This project is in the very early planning stages and thus will not have any code written for it for a few years. im still in college and want to spend my time job/internship prepping. if you come across this repo early on in the dev process, this is why there is not much activity. This is also only the public facing repo, not my private repo for daily work. This will only get updated after certain milestones gets passed.
+
+# Other Possible Additions
+A custom GUI installer. Possible video streaming platform as a opt-in userspace app. These are just possible ideas for userspace apps.
