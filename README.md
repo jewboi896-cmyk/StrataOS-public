@@ -15,7 +15,7 @@ Initial support will be limited to only QEMU for now. Plans exist to add support
 
 
 # Build System
-The build system will be GNU Make
+The build system will be GNU Make. If you use a different build system because you prefer it over GNU, do not open any PRs regarding support for other build systems as i will just ignore them.
 
 # Current Considerations for Viewers
 This project is in the very early planning stages and thus will not have any code written for it for a few years. im still in college and want to spend my time job/internship prepping. if you come across this repo early on in the dev process, this is why there is not much activity. This is also only the public facing repo, not my private repo for daily work. This will only get updated after certain milestones gets passed.
