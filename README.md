@@ -18,7 +18,7 @@ Initial support will be limited to only QEMU for now. Plans exist to add support
 The build system will be GNU Make. If you use a different build system because you prefer it over GNU, do not open any PRs regarding support for other build systems as i will just ignore them.
 
 # PR Policy
-Anyone can open PRs at any time but as this is a solo project, it may be years before i start reviewing any PRs. 
+Anyone can open PRs at any time but as this is a solo project, it may be years before i start reviewing any PRs. If you want to contribute to this repo early on in the dev process, keep the commits/PRs focused on the kernel code and not userspace until userspace has been scaffolded by me so that you can mirror my process.
 
 # AI Policy
 You can use AI to write code for any part of this project but you must make it known that the code is AI generated. The PR must be tagged with ai-generated. See the labels section for more info. If you use AI for writing anything other than build system scripts or other config stuff, i will probably ignore it as i am responsible for this repo's code and the legality of who owns AI generated code is still a gray area.
