@@ -30,4 +30,4 @@ This project is in the very early planning stages and thus will not have any cod
 A custom GUI installer. Possible video streaming platform as a opt-in userspace app. These are just possible ideas for userspace apps.
 
 # My AI Usage in This Project
-I am strictly using AI to create markdown docs with all of the decisions and such as well as generating build scripts and such. I am not using it to write any actual logic and kernel systems/subsystems code
+I am strictly using AI to create markdown docs with all of the decisions and such as well as generating build scripts and such. I am not using it to write any actual logic and kernel systems/subsystems code. I will generally expect the same from any contributions from outside sources, no matter the source.
