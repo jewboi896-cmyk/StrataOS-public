@@ -57,7 +57,7 @@ To maximize educational utility, the project generates and maintains two distinc
 
 * **Build System**: Strictly **GNU Make**. PRs attempting to transition to other build systems (CMake, Meson, Ninja, etc.) will be systematically ignored. You are free to add other configurations but just be aware that if you do, you are responsible for the whole process from building, testing, deploying, and maintaining. I will not assist you.
 
-* **Emulator Targets**: Initial support is strictly focused on **QEMU**. Roadmap plans include expanding testing frameworks to natively target **Bochs** and **VirtualBox** down the line.
+* **Emulator Targets**: Initial support is strictly focused on **QEMU**. Roadmap plans include expanding testing frameworks to natively target **Bochs** and **VirtualBox** down the line. Any others will not be supported so if you use them and have issues, I will not assist you and the PR/Issue will be automatically closed.
 
 ### Building & Emulation Mockup
 **Note**: this what is here right now is just a placeholder. i will add real instructions once the building process has started.
