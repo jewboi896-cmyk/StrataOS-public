@@ -55,7 +55,7 @@ To maximize educational utility, the project generates and maintains two distinc
 
 ## 🏗 Build & Emulator Infrastructure
 
-* **Build System**: Strictly **GNU Make**. PRs attempting to transition to other build systems (CMake, Meson, Ninja, etc.) will be systematically ignored. You are free to add other configurations but just be aware that if you do, you are responsible for the whole process from building to testing to deploying. I will not assist you.
+* **Build System**: Strictly **GNU Make**. PRs attempting to transition to other build systems (CMake, Meson, Ninja, etc.) will be systematically ignored. You are free to add other configurations but just be aware that if you do, you are responsible for the whole process from building, testing, deploying, and maintaining. I will not assist you.
 
 * **Emulator Targets**: Initial support is strictly focused on **QEMU**. Roadmap plans include expanding testing frameworks to natively target **Bochs** and **VirtualBox** down the line.
 
@@ -115,7 +115,7 @@ AI tools may be leveraged to accelerate development, provided they align with th
 
 ---
 
-## 🗺 Future Userspace Concept Roadmap
+## 🗺 Future User-space Concept Roadmap
 
 While deep in kernel planning, future opt-in user-space components are tracking the following targets:
 - [ ] Statically compiled custom user runtime environment
@@ -128,6 +128,20 @@ While deep in kernel planning, future opt-in user-space components are tracking 
 If you have any other ideas, please open up a Discussion thread and we can talk it over. Once its approved, add it to this list above and you are free to start working on whatever it is. Once something on this list is confirmed to be done, mark it like this: (Done) at the end of the entry.
 
 ---
+
+## 🐳Reproducibility
+I am planning on using Docker eventually but until then, the languages standards at the moment will be the following (I will update these as newer stable standards come out until development starts at which point, these toolchains will become locked for a time.):
+
+| Language | Version | Notes |
+| :--- | :---: | :--- |
+| C | C23 | None |
+| Rust | 1.97.1 | None |
+| C++ | C++23 | None |
+| Zig | 0.16.0 | Will not be used until at least 1.0 release and confirmed solid freestanding support |
+| Odin | dev-2026-08 | Same as Zig above |
+| C3 | 0.8.3 | Same as both Zig and Odin |
+
+Anyone is free to open PRs expanding the containerization infrastructure but just like adding another build system, you will be solely responsible for building, testing, deploying, and maintaining it. I will not help you.
 
 ## 📜 License
 
