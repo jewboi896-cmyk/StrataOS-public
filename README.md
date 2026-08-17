@@ -145,5 +145,5 @@ Anyone is free to open PRs expanding the containerization infrastructure but jus
 
 ## 📜 License
 
-Distributed under the **Apache License 2.0**. See the `LICENSE` file for more details. Everything from the core kernel space to the multi-language driver strata is open for modification, distribution, and commercial use under these terms.
+Distributed under the **Apache License 2.0**. See the `LICENSE` file for more details. Everything from the core kernel space to the multi-language driver strata to any user-space apps is open for modification, distribution, and commercial use under these terms.
 
