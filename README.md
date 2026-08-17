@@ -99,6 +99,8 @@ Contributions are welcome, but given the solo nature of the project, please resp
 
 * **Contributions**: Anybody can become a contributor regardless of number of commits or activity. Anybody is also free to reach out directly to me in the event that they want to become part of the core dev team. My email is: derekh789@icloud.com. There will be no required time commitment for any potential core dev team members, you can build, test, and review anything at your own pace.
 
+* **Note**: For consistency throughout this project, everything should use **camelCase** simply because this is my OS and thus you must adhere to my preferences. This is built first for me and secondly for the general community and this keeps everything uniform. Also, starting brackets for functions start at the end of the function **not** on the next line. Same reasoning as above. Any PRs not following these guidelines will be auto-rejected and I will leave a comment mentioning this. You are then free to submit another PR for the same issue/bug if it follows these conventions.
+
 ---
 
 ## 🤖 AI Usage & Legality Policy
@@ -119,8 +121,11 @@ While deep in kernel planning, future opt-in user-space components are tracking 
 - [ ] Statically compiled custom user runtime environment
 - [ ] Native Graphical User Interface (GUI) system installer
 - [ ] Dedicated video streaming platform integrated directly as a native user-space app
+- [ ] Custom CLI tool as a user-space app -this will be done by me as i have custom ideas for this
+- [ ] Music Streaming Platform as a user-space app
+- [ ] Web Browser as a user-space app
 
-If you have any other ideas, please open up a Discussion thread and we can talk it over. Once its approved, add it to this list above and you are free to start working on whatever it is.
+If you have any other ideas, please open up a Discussion thread and we can talk it over. Once its approved, add it to this list above and you are free to start working on whatever it is. Once something on this list is confirmed to be done, mark it like this: (Done) at the end of the entry.
 
 ---
 
