@@ -79,7 +79,7 @@ make run
 
 > **Important**: This project is in its early architectural planning phases. 
 > 
-> I (the only dev) is currently in college focusing heavily on career and internship preparation. Consequently, active logic commits may not begin for a few years at the earliest. 
+> I (the only dev) is currently in college focusing heavily on career and internship preparation. Consequently, active logic commits may will not begin for at least few years at the earliest. 
 > 
 > Additionally, **this repository is a public mirror** meant for tracking stable milestones. Daily active development occurs entirely inside a private workspace and will be pushed here only when major checkpoints are cleared. Nobody is permitted to use the private repo at any time unless I specifically give you access/permission to do so.
 
