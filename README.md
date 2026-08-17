@@ -40,7 +40,7 @@ Unlike static hobbyist kernels, every core system and subsystem in StrataOS can 
 | **Network Stack** | `C / C++ / C3` | Custom custom-built network stack running native drivers. |
 | **Interactivity Layer** | `Go` | Handled seamlessly via a dedicated Go runtime wrapper. |
 
-**Note**: I'm planning on creating my own custom system call numbers and such. This means that no app can natively run on this without code modification.
+**Note**: I'm planning on creating my own custom system call numbers and such. This means that no app can natively run on this without code modification. This is a deliberate decision and I understand the implications.
 
 ---
 
