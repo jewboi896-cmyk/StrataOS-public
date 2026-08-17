@@ -1,33 +1,124 @@
-# StrataOS-public
+<div align="center">
+  <!-- Optional Project Banner -->
+  <!-- <img src="docs/strata_logo.png" alt="StrataOS Logo" width="250"/> -->
 
-# Intro
-this is a monolithic style custom OS targeting x86_64 built for myself as well as an educational tool to help beginners understand OS concepts. It uses the Limine Bootloader. It will have two sets of documentation: 1.) auto generated API and standard library docs using external tools that scrape the method signatures and compiles complete documentation and 2.) custom made docs geared towards beginners that explain the "why" behind OS concepts. This is planned to be the following: each system/subsystem can be configured to use between 3-5 different implementations of each system/subsystem that can be swapped either via flags passed in via the terminal or you can edit the master Makefile directly. the algorithms will range from as simple as possible to full production level stack. Each system/subsystem will have their own Makefiles that exist to tell the master Makefile how to tell the linker script how to stitch together the final binary. it also exists to keep the preprocessor stuff out of the actual code files and header files (for the applicable languages).
+  # 🌌 StrataOS
 
-# Lang Stack
-Core kernel systems/subsystems: pure C
+  **A monolithic-style custom x86_64 operating system designed as an educational platform with swappable algorithmic strata.**
 
-Drivers and non-core systems/subsystems: mix of possible languages include: C, C++, C3, Rust, Zig and/or Odin
+  [![Architecture](https://shields.io)](#)
+  [![Bootloader](https://shields.io)](#)
+  [![Build System](https://shields.io)](#)
+  [![License](https://shields.io)](https://opensource.org)
+</div>
 
-I also want to implement my own simple network stack with drivers either in: C, C++, or C3. Interactivity through a Go wrapper
+---
 
-# Virtual Machine/Emulator Support
-Initial support will be limited to only QEMU for now. Plans exist to add support for both Bochs and VirtualBox emulators in the future
+## 🏛 Project Overview & Philosophy
 
+**StrataOS** is a monolithic-style custom operating system targeting the `x86_64` architecture, booting via the **Limine Bootloader**. It serves two primary purposes: a personal engineering sandbox and a highly structured educational tool built to help beginners master low-level concepts.
 
-# Build System
-The build system will be GNU Make. If you use a different build system because you prefer it over GNU, do not open any PRs regarding support for other build systems as i will just ignore them.
+### 🔄 The Swappable Strata System
+Unlike static hobbyist kernels, every core system and subsystem in StrataOS can be configured to use between **3 to 5 different algorithmic implementations**.
 
-# PR Policy
-Anyone can open PRs at any time but as this is a solo project, it may be years before i start reviewing any PRs. If you want to contribute to this repo early on in the dev process, keep the commits/PRs focused on the kernel code and not userspace until userspace has been scaffolded by me so that you can mirror my process.
+* **The Spectrum**: Implementations range from dead-simple (educational/naive) to full production-level stacks.
 
-# AI Policy
-You can use AI to write code for any part of this project but you must make it known that the code is AI generated. The PR must be tagged with ai-generated. See the labels section inside of the PRs section for more info. If you use AI for writing anything other than build system scripts or other config stuff, i will probably ignore it as i am responsible for this repo's code and the legality of who owns AI generated code is still a gray area.
+* **No Code Bloat**: Swapping algorithms is handled entirely through configuration flags passed via the terminal or by editing the master `Makefile` directly. This ensures that there is no need to use complex vtable stuff to swap things out at runtime.
 
-# Current Considerations for Viewers/Contributors
-This project is in the very early planning stages and thus will not have any code written for it for a few years. im still in college and want to spend my time job/internship prepping. if you come across this repo early on in the dev process, this is why there is not much activity. This is also only the public facing repo, not my private repo for daily work. This will only get updated after certain milestones gets passed.
+* **Decoupled Architecture**: Individual subsystem Makefiles instruct the master build system how to pipe configuration to the linker script, dynamically stitching together the final binary. This cleanly isolates preprocessor macros entirely outside the primary source files and headers.
 
-# Other Possible Additions
-A custom GUI installer. Possible video streaming platform as a opt-in userspace app. These are just possible ideas for userspace apps.
+---
 
-# My AI Usage in This Project
-I am strictly using AI to create markdown docs with all of the decisions and such as well as generating build scripts and such. I may or may not share those docs here on the public repo. I haven't decided yet. I am not using it to write any actual logic and kernel systems/subsystems code. I will generally expect the same from any contributions from outside sources, no matter the source.
+## 🔬 Language & Subsystem Matrix
+
+| Stratum / Layer | Language | Architectural Purpose |
+| :--- | :---: | :--- |
+| **Core Kernel** | `Pure C` | Core executive, MMU, scheduling, and foundational stubs. |
+| **Drivers & Non-Core** | `Polyglot` | Modular extensions written in C, C++, C3, Rust, Zig, and/or Odin. |
+| **Network Stack** | `C / C++ / C3` | Custom custom-built network stack running native drivers. |
+| **Interactivity Layer** | `Go` | Handled seamlessly via a dedicated Go runtime wrapper. |
+
+---
+
+## 📚 Dual-Track Documentation Blueprint
+
+To maximize educational utility, the project generates and maintains two distinct documentation tracks:
+1. **Auto-Generated API Reference**: External automated tools scrape code signature definitions to compile complete, strict standard library documentation.
+
+2. **Conceptual "Why" Documentation**: Custom-authored guides tailored specifically for beginners, detailing the exact logic and system design tradeoffs behind low-level OS concepts.
+
+---
+
+## 🏗 Build & Emulator Infrastructure
+
+* **Build System**: Strictly **GNU Make**. PRs attempting to transition to other build systems (CMake, Meson, Ninja, etc.) will be systematically ignored. You are free to add other configurations but just be aware that if you do, you are responsible for the whole process from building to testing to deploying. I will not assist you.
+
+* **Emulator Targets**: Initial support is strictly focused on **QEMU**. Roadmap plans include expanding testing frameworks to natively target **Bochs** and **VirtualBox** down the line.
+
+### Building & Emulation Mockup
+**Note**: this what is here right now is just a placeholder. i will add real instructions once the building process has started.
+```bash
+# Clone the public milestone mirror
+git clone https://github.com
+cd StrataOS
+
+# Compile using specific algorithmic flags (Example)
+make VMM_ALGO=buddy_allocator iso
+
+# Boot inside the QEMU environment
+make run
+```
+
+---
+
+## ⚠️ Repository Status Notice (Read Before Viewing)
+
+> **Important**: This project is in its early architectural planning phases. 
+> 
+> I (the only dev) is currently in college focusing heavily on career and internship preparation. Consequently, active logic commits may not begin for a few years at the earliest. 
+> 
+> Additionally, **this repository is a public mirror** meant for tracking stable milestones. Daily active development occurs entirely inside a private workspace and will be pushed here only when major checkpoints are cleared. Nobody is permitted to use the private repo at any time unless I specifically give you access/permission to do so.
+
+---
+
+## 🤝 Contribution & Pull Request Policy
+
+Contributions are welcome, but given the solo nature of the project, please respect the following operational guidelines:
+
+* **Review Latency**: Pull requests may sit unreviewed for extended periods (potentially years) during early infrastructure phases.
+
+* **Scope Isolation**: Keep early PRs tightly focused on core **kernel-space code**. Do not touch user space until the foundation has been formally scaffolded by me (the sole maintainer and dev). If you have user-space app ideas please open up a thread under the Discussions tab and I will get back to you on your idea as soon as I can.
+
+* **Strict Build Consistency**: Do not submit PRs changing the core GNU Make structure unless you see that I have made a mistake somewhere.
+
+* **Discussions**: If you have other ideas for user-space apps, please submit something in the discussions tab and tag me in it so that when I have time, I can take a look at it. Please keep this only regarding user-space stuff. If you spot a kernel bug or issue please open either a PR for bugs or a Issue for issues.
+
+---
+
+## 🤖 AI Usage & Legality Policy
+
+AI tools may be leveraged to accelerate development, provided they align with the following compliance parameters:
+
+* **Mandatory Disclosure**: Any code generated via AI must be clearly declared in the PR description. The PR must be tagged with the `ai-generated` label. See the PR section and find the labels section on the top of the page for more info. You are free to add other/new labels as needed granted you open a Discussion with me and I approve it.
+
+* **Core Logic Restrictions**: AI assistance should be confined to build system configurations, automation scripts, and administrative templates. Contributions containing AI-generated kernel logic or core runtime systems will most likely be ignored due to intellectual property gray areas.
+
+* **Internal Alignment**: I personally restrict internal AI usage to generating Markdown documentation, tracking design decisions, and scripting build structures. No actual kernel or system logic code is AI-written by me.
+
+---
+
+## 🗺 Future Userspace Concept Roadmap
+
+While deep in kernel planning, future opt-in user-space components are tracking the following targets:
+- [ ] Statically compiled custom user runtime environment
+- [ ] Native Graphical User Interface (GUI) system installer
+- [ ] Dedicated video streaming platform integrated directly as a native user-space app
+
+If you have any other ideas, please open up a Discussion thread and we can talk it over. Once its approved, add it to this list above and you are free to start working on whatever it is.
+
+---
+
+## 📜 License
+
+Distributed under the **Apache License 2.0**. See the `LICENSE` file for more details. Everything from the core kernel space to the multi-language driver strata is open for modification, distribution, and commercial use under these terms.
+
