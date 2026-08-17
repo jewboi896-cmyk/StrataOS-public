@@ -63,7 +63,7 @@ To maximize educational utility, the project generates and maintains two distinc
 **Note**: this what is here right now is just a placeholder. i will add real instructions once the building process has started.
 ```bash
 # Clone the public milestone mirror
-git clone https://github.com
+git clone https://github.com/jewboi896-cmyk/StrataOS-public
 cd StrataOS
 
 # Compile using specific algorithmic flags (Example)
@@ -93,9 +93,11 @@ Contributions are welcome, but given the solo nature of the project, please resp
 
 * **Scope Isolation**: Keep early PRs tightly focused on core **kernel-space code**. Do not touch user space until the foundation has been formally scaffolded by me (the sole maintainer and dev). If you have user-space app ideas please open up a thread under the Discussions tab and I will get back to you on your idea as soon as I can.
 
-* **Strict Build Consistency**: Do not submit PRs changing the core GNU Make structure unless you see that I have made a mistake somewhere.
+* **Strict Build Consistency**: Do not submit PRs changing the core GNU Make structure unless you see that I have made a mistake somewhere or you see that a optimization can be made to improve build times, have a smaller final binary size, etc. You are also free to edit the linker for the same reasons as well. If you do so just open a PR and I will get back to you whenever I can.
 
-* **Discussions**: If you have other ideas for user-space apps, please submit something in the discussions tab and tag me in it so that when I have time, I can take a look at it. Please keep this only regarding user-space stuff. If you spot a kernel bug or issue please open either a PR for bugs or a Issue for issues.
+* **Discussions**: If you have other ideas for user-space apps, please submit something in the discussions tab and tag me in it so that when I have time, I can take a look at it. Please keep this only regarding user-space stuff. If you spot a kernel bug or issue please open either a PR for bugs or a Issue for issues and I will take a look.
+
+* **Contributions**: Anybody can become a contributor regardless of number of commits or activity. Anybody is also free to reach out directly to me in the event that they want to become part of the core dev team. My email is: derekh789@icloud.com. There will be no required time commitment for any potential core dev team members, you can build, test, and review anything at your own pace.
 
 ---
 
