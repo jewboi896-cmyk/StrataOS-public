@@ -29,7 +29,7 @@ Unlike static hobbyist kernels, every core system and subsystem in StrataOS can 
 
 * **No Code Bloat**: Swapping algorithms is handled entirely through configuration flags passed via the terminal or by editing the master `Makefile` directly. This ensures that there is no need to use complex vtable stuff to swap things out at runtime.
 
-* **Decoupled Architecture**: Individual subsystem Makefiles instruct the master build system how to pipe configuration to the linker script, dynamically stitching together the final binary. This cleanly isolates preprocessor macros entirely outside the primary source files and headers. Note that because of this, the config files will get long, complex, and hard to read. This is a deliberate choice. I'd rather have this kind of stuff isolated from the actual logic then embedded inside of it. 
+* **Decoupled Architecture**: Individual subsystem Makefiles instruct the master build system how to pipe configuration to the linker script, dynamically stitching together the final binary. This cleanly isolates preprocessor macros entirely outside the primary source files and headers. Note that because of this, the config files will get long, complex, and hard to read. This is a deliberate choice. I'd rather have this kind of stuff isolated from the actual logic than embedded inside of it. 
 
 ---
 
@@ -42,7 +42,10 @@ Unlike static hobbyist kernels, every core system and subsystem in StrataOS can 
 | **Network Stack** | `C / C++ / C3` | Custom-built network stack running native drivers. |
 | **Interactivity Layer** | `Go` | Handled seamlessly via a dedicated Go runtime wrapper. |
 
-**Note**: I'm planning on creating my own custom system call numbers and such. This means that no app can natively run on this without code modification. This is a deliberate decision and I understand the implications. As such, all of the user-space stuff will be quite extensive and cover a wide range of projects so as to reduce the dependence on needing to rewrite existing systems to comply with my syscall mappings. This will be opt-out at build time so if you opt-out, I hope you know what you are getting yourself into. I am planning on writing a custom intercept and mapping layer eventually so that apps don't need to be rewritten but until that point in time comes, you are on your own for this stuff. Thank you for your understanding.
+## ⚠️ Custom System Call & Existing Binary Compatibility
+> I'm planning on creating my own custom system call numbers and such. This means that no app can natively run on this without code modification. This is a deliberate decision and I understand the implications.
+> As such, all of the user-space stuff will be quite extensive and cover a wide range of projects so as to reduce the dependence on needing to rewrite existing systems to comply with my syscall mappings. This will be opt-out at build time so if you opt-out, I hope you know what you are getting yourself into. If you opt-out of using the custom syscall stuff, you will be responsible for porting the app to comply with my custom mappings until the translation layer is written.
+> I am planning on writing a custom intercept and mapping layer eventually so that apps don't need to be rewritten but until that point in time comes, you are on your own for this stuff. Thank you for your understanding.
 
 ---
 
@@ -59,9 +62,9 @@ To maximize educational utility, the project generates and maintains two distinc
 
 ## 🏗 Build & Emulator Infrastructure
 
-* **Build System**: Strictly **GNU Make**. PRs attempting to transition to other build systems (CMake, Meson, Ninja, etc.) will be systematically ignored. You are free to add other configurations but just be aware that if you do, you are responsible for the whole process from building, testing, deploying, and maintaining. I will not assist you.
+* **Build System**: Strictly **GNU Make**. PRs attempting to fully transition to other build systems (CMake, Meson, Ninja, etc.) will be systematically ignored. Anyone is free however to add other configurations in addition to GNU Make but just be aware that if you do, you are responsible for the whole process from building, testing, deploying, and maintaining. I will not assist you.
 
-* **Emulator Targets**: Initial support is strictly focused on **QEMU**. Roadmap plans include expanding testing frameworks to natively target **Bochs** and **VirtualBox** down the line. Any others will not be supported so if you use them and have issues, I will not assist you and the PR/Issue will be automatically closed.
+* **Emulator Targets**: Initial support is strictly focused on **QEMU**. Roadmap plans include expanding testing frameworks to natively target **Bochs** and **VirtualBox** down the line. Any others will not be supported so if you use them and have issues, I will not assist you and the PR/Issue will be automatically closed. You are however, free to add additional targets but if you choose to do that, you will be solely responsible for building, testing, deploying, and maintaining that support. I will not assist you.
 
 ### Building & Emulation Mockup
 **Note**: this what is here right now is just a placeholder. i will add real instructions once the building process has started.
@@ -85,7 +88,7 @@ make run
 > 
 > I (the only dev) am currently in college focusing heavily on career and internship preparation. Consequently, active logic commits will not begin for a few years at the earliest. 
 > 
-> Additionally, **this repository is a public mirror** meant for tracking stable milestones. Daily active development occurs entirely inside a private workspace and will be pushed here only when major checkpoints are cleared. Nobody is permitted to use the private repo at any time unless I specifically give you access/permission to do so.
+> Additionally, **this repository is a public mirror** meant for tracking stable milestones. Daily active development occurs entirely inside a private workspace and will be pushed here only when major checkpoints are cleared. Nobody is permitted to use the private repo at any time unless I specifically give you access/permission to do so (as in you want to be a part of the core dev team).
 
 ---
 
@@ -103,7 +106,11 @@ Contributions are welcome, but given the solo nature of the project, please resp
 
 * **Contributions**: Anybody can become a contributor regardless of number of commits or activity. Anybody is also free to reach out directly to me in the event that they want to become part of the core dev team. If you want to contact me privately, open an issue on my main page and I will get back to you as soon as I can. There will be no required time commitment for any potential core dev team members, you can build, test, and review anything at your own pace.
 
-* **Note**: For consistency throughout this project, everything should use **camelCase** simply because this is my OS and thus you must adhere to my preferences. This is built first for me and secondly for the general community and this keeps everything uniform. Also, starting brackets for functions start at the end of the function **not** on the next line. Same reasoning as above. Any structs and such should use **PascalCase**. This also includes enums, unions, and typedefs. Use **descriptive** variable names as much as possible. Limit **single letter** variable names to **only strictly necessary** variables as this OS meant to be used as a teaching tool first, before anything else. Any PRs not following these guidelines will be auto-rejected and I will leave a comment mentioning this. You are then free to submit another PR for the same issue/bug if it follows these conventions.
+* **Style & Formatting Rules**:
+  * **Functions & Variables**: `camelCase`
+  * **Types (Structs, Enums, Unions, Typedefs)**: `PascalCase`
+  * **Brace Style**: Opening brackets `{` must be placed on the **same line** as the function declaration/header, not on a new line.
+  * **Naming**: Almost always use **descriptive variable names**. Limit single-letter variables strictly to loop counters or math formulas to maintain readability for educational purposes.
 
 ---
 
@@ -133,7 +140,7 @@ If you have any other ideas, please open up a Discussion thread inside of the Id
 
 ---
 
-## 🐳Reproducibility
+## 🐳 Reproducibility & Containerization
 I am planning on using Docker eventually but until then, the languages standards at the moment will be the following (I will update these as newer stable standards come out until development starts at which point, these toolchains will become locked for a time.):
 
 | Language | Version | Notes |
@@ -149,9 +156,12 @@ Anyone is free to open PRs expanding the containerization infrastructure but jus
 
 ---
 
-## 🦊GitLab
+## 🦊 GitLab Notice
 
-Hello to everyone reading this on GitLab. Please note that the main contributions, issues, PRs, discussions and such are on Github. Also understand that the GitLab mirror could fall significantly behind every so often so I'd advise you to also check the GitHub page as well if you want frequent updates and changes. The GitLab is there for redundancy mostly. You are still free to open PRs or Issues and such just know that I will not be regularly checking on them so its best if you came to the GitHub page instead. Once a style guide is posted on GitHub, I will also post it on GitLab and all PRs must adhere to it. Thanks for your understanding.
+## ⚠️ GitLab Status Notice (Read first if viewing in GitLab)
+> Hello to everyone reading this on GitLab. Please note that the main contributions, issues, PRs, discussions and such are on Github. Also understand that the GitLab mirror could fall significantly behind every so often so I'd advise you to also check the GitHub page as well if you want frequent updates and changes.
+>
+> The GitLab is here for redundancy mostly. You are still free to open PRs or Issues and such just know that I will not be regularly checking on them so its best if you came to the GitHub page instead. Once a style guide is posted on GitHub, I will also post it on GitLab and all PRs must adhere to it. Thanks for your understanding.
 
 ---
 
