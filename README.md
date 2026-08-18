@@ -137,7 +137,7 @@ While deep in kernel planning, future opt-in user-space components are tracking 
 - [ ] Native Graphical User Interface (GUI) system installer
 - [ ] Dedicated video streaming platform integrated directly as a native user-space app
 - [ ] Custom CLI tool as a user-space app - this will be done by me as i have custom ideas for this
-- [ ] Music Streaming Platform as a user-space app
+- [ ] Music Streaming Platform as a user-space app - like a Spotify esc app
 - [ ] Web Browser as a user-space app - like a Brave Browser esc app
 - [ ] Fully compliant network stack - this must be built before the browser and right now, the scope is extremely simple
 - [ ] File Explorer esc app using the custom Rust filesystem
