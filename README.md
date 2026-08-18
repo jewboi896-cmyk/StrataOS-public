@@ -125,7 +125,7 @@ While deep in kernel planning, future opt-in user-space components are tracking 
 - [ ] Music Streaming Platform as a user-space app
 - [ ] Web Browser as a user-space app
 
-If you have any other ideas, please open up a Discussion thread and we can talk it over. Once its approved, add it to this list above and you are free to start working on whatever it is. Once something on this list is confirmed to be done, mark it like this: (Done) at the end of the entry and edit the appropriate entry via this doc to add a checkmark so that everyone else knows as well.
+If you have any other ideas, please open up a Discussion thread inside of the Ideas section and we can talk it over. Once its approved, add it to this list above and you are free to start working on whatever it is. Once something on this list is confirmed to be done, mark it like this: (Done) at the end of the entry and edit the appropriate entry via this doc to add a checkmark so that everyone else knows as well.
 
 ---
 
