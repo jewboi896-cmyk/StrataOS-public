@@ -140,7 +140,7 @@ While deep in kernel planning, future opt-in user-space components are tracking 
 - [ ] Music Streaming Platform as a user-space app
 - [ ] Web Browser as a user-space app - like a Brave Browser esc app
 - [ ] Fully compliant network stack - this must be built before the browser and right now, the scope is extremely simple
-- [ ] File Explorer esc App using the custom Rust filesystem
+- [ ] File Explorer esc app using the custom Rust filesystem
 - [ ] Security Monitor - like a Windows Security esc app
 - [ ] Resource Monitor - like a Task Manager esc app
 
