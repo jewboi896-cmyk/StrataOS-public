@@ -151,7 +151,7 @@ If you have any other ideas, please open up a Discussion thread inside of the Id
 ## 🐳 Reproducibility & Containerization
 I am planning on using Docker eventually but until then, the languages standards at the moment will be the following (I will update these as newer stable standards come out until development starts at which point, these toolchains will become locked for a time.):
 
-| Language | Version | Notes |
+| Language | Current Stable Version (2026) | Notes |
 | :--- | :---: | :--- |
 | C | C23 | None |
 | Rust | 1.97.1 | None |
