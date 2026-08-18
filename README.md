@@ -135,7 +135,7 @@ Failure to comply with the AI guidelines will result in a ban from the ability t
 While deep in kernel planning, future opt-in user-space components are tracking the following targets:
 - [ ] Statically compiled custom user runtime environment
 - [ ] Native Graphical User Interface (GUI) system installer
-- [ ] Dedicated video streaming platform integrated directly as a native user-space app
+- [ ] Dedicated video streaming platform integrated directly as a native user-space app - like a Youtube esc app
 - [ ] Custom CLI tool as a user-space app - this will be done by me as i have custom ideas for this
 - [ ] Music Streaming Platform as a user-space app - like a Spotify esc app
 - [ ] Web Browser as a user-space app - like a Brave Browser esc app
