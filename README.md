@@ -143,6 +143,14 @@ I am planning on using Docker eventually but until then, the languages standards
 
 Anyone is free to open PRs expanding the containerization infrastructure but just like adding another build system, you will be solely responsible for building, testing, deploying, and maintaining it. I will not help you.
 
+---
+
+## 🦊GitLab
+
+Hello to everyone reading this on GitLab. Please note that the main contributions, issues, PRs, discussions and such are on Github. Also understand that the GitLab mirror could fall significantly behind every so often so I'd advise you to also check the GitHub page as well if you want frequent updates and changes. The GitLab is there for redundancy mostly. You are still free to open PRs or Issues and such just know that I will not be regularly checking on them so its best if you came to the GitHub page instead. Thanks for your understanding.
+
+---
+
 ## 📜 License
 
 Distributed under the **Apache License 2.0**. See the `LICENSE` file for more details. Everything from the core kernel space to the multi-language driver strata to any user-space apps is open for modification, distribution, and commercial use under these terms.
