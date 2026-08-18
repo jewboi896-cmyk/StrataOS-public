@@ -9,7 +9,7 @@
   [![Architecture](https://shields.io)](#)
   [![Bootloader](https://shields.io)](#)
   [![Build-System](https://shields.io)](#)
-  [![License](https://shields.io)](https://opensource.org)
+  [![License](https://shields.io)](#)
   [![API-Docs](https://shields.io)](#)
   [![Beginner-Docs](https://shields.io)](#)
 </div>
