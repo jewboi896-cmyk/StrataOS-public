@@ -141,6 +141,7 @@ Failure to comply with the AI guidelines will result in a ban from the ability t
 | Go | Setup Go automations |
 |    |                      | Style Guide PR policy |
 |    |                      | General Typo and Grammar Checks |
+|    |                      | General Emulator, Build Scripts & Config |
 
 ---
 
