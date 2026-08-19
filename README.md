@@ -139,7 +139,8 @@ Failure to comply with the AI guidelines will result in a ban from the ability t
 | Zig | Setup Zig automations |
 | Odin | Setup Odin automations |
 | Go | Setup Go automations |
-|    |                      | Style Guide PR policy
+|    |                      | Style Guide PR policy |
+|    |                      | General Typo and Grammar Checks |
 
 ---
 
