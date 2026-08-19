@@ -130,6 +130,19 @@ Failure to comply with the AI guidelines will result in a ban from the ability t
 
 ---
 
+## ♾️ CI Pipeline Using Github Actions (Planned)
+
+| Language | Setup Notes | Miscellaneous | 
+| :--- | :---: | :--- |
+| C/C++ | Setup C/C++ core automations |
+| Rust | Setup Rust filesystem automations |
+| Zig | Setup Zig automations |
+| Odin | Setup Odin automations |
+| Go | Setup Go automations |
+|    |                      | Style Guide PR policy
+
+---
+
 ## 🗺 Future User-space Concept Roadmap
 
 While deep in kernel planning, future opt-in user-space components are tracking the following targets:
