@@ -159,7 +159,7 @@ I am planning on using Docker eventually but until then, the languages standards
 | Zig | 0.16.0 | Will not be used until at least 1.0 release and confirmed solid freestanding support |
 | Odin | dev-2026-08 | Same as Zig above |
 | C3 | 0.8.3 | Same as both Zig and Odin |
-| Go | 1.27.0 | Networking middleman |
+| Go | 1.27.0 | Networking middleman, user-space apps, etc |
 
 Anyone is free to open PRs expanding the containerization infrastructure but just like adding another build system, you will be solely responsible for building, testing, deploying, and maintaining it. I will not help you.
 
