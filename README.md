@@ -153,13 +153,13 @@ I am planning on using Docker eventually but until then, the languages standards
 
 | Language | Current Stable Version (2026) | Notes |
 | :--- | :---: | :--- |
-| C | C23 | None |
-| Rust | 1.97.1 | None |
-| C++ | C++23 | None |
+| C | C23 | Core kernel systems/subsystems, drivers, networking, etc |
+| Rust | 1.97.1 | Filesystem, drivers, certain CLI tools, etc |
+| C++ | C++23 | drivers, networking, etc |
 | Zig | 0.16.0 | Will not be used until at least 1.0 release and confirmed solid freestanding support |
 | Odin | dev-2026-08 | Same as Zig above |
 | C3 | 0.8.3 | Same as both Zig and Odin |
-| Go | 1.27.0 | None |
+| Go | 1.27.0 | Networking middleman |
 
 Anyone is free to open PRs expanding the containerization infrastructure but just like adding another build system, you will be solely responsible for building, testing, deploying, and maintaining it. I will not help you.
 
