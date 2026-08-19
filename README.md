@@ -16,7 +16,7 @@
 
 ---
 
-**Note**: At this stage, all of the above links are strictly placeholders and do not link to anything. This will change in the future as things actually get built for real.
+**Note**: At this stage, all of the above links are strictly placeholders and do not link to anything. This will change in the future as things actually get built for real. Also note that a CI using Actions is planned for the future.
 
 ## 🏛 Project Overview & Philosophy
 
