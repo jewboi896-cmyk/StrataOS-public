@@ -40,7 +40,7 @@ Unlike static hobbyist kernels, every core system and subsystem in StrataOS can 
 | **Core Kernel** | `Pure C` | Core executive, MMU, scheduling, and foundational stubs. |
 | **Drivers & Non-Core** | `Polyglot` | Modular extensions written in C, C++, C3, Rust, Zig, and/or Odin. |
 | **Network Stack** | `C / C++ / C3` | Custom-built network stack running native drivers. |
-| **Interactivity Layer** | `Go` | Handled seamlessly via a dedicated Go runtime wrapper. |
+| **Network Interactivity Layer** | `Go` | Handled seamlessly via a dedicated Go runtime wrapper. |
 
 ## ⚠️ Custom System Call & Existing Binary Compatibility
 > I'm planning on creating my own custom system call numbers and such. This means that no app can natively run on this without code modification. This is a deliberate decision and I understand the implications.
