@@ -38,6 +38,7 @@ Unlike static hobbyist kernels, every core system and subsystem in StrataOS can 
 | Stratum / Layer | Language | Architectural Purpose |
 | :--- | :---: | :--- |
 | **Core Kernel** | `Pure C` | Core executive, MMU, scheduling, and foundational stubs. |
+| **Filesystem** | `Rust` | Filesystem and all related things like a terminal, etc |
 | **Drivers & Non-Core** | `Polyglot` | Modular extensions written in C, C++, C3, Rust, Zig, and/or Odin. |
 | **Network Stack** | `C / C++ / C3` | Custom-built network stack running native drivers. |
 | **Network Interactivity Layer** | `Go` | Handled seamlessly via a dedicated Go runtime wrapper. |
