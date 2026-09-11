@@ -183,6 +183,8 @@ Anyone is free to open PRs expanding the containerization infrastructure but jus
 
 **Golang Note**: Go will be used as the middleman for the network stack. It will sit on top of the kernel network drivers but under the user-space apps that call the network drivers. This is the only place where Go will be used in this capacity. It will live in user-space. Any user-space apps are free to use whatever language the creator wants. The above languages (excluding Go for the reasons above) will be used for the kernel space mostly.
 
+**Zig, Odin, C3 Note**: If these languages are added to the stack, they will be kernel space driver(s) and user space stuff only as C, C++, and Rust will do most of the heavy lifting.
+
 ---
 
 ## 🦊 GitLab Notice (Read first if viewing in GitLab)
