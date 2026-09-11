@@ -90,6 +90,8 @@ make run
 > I (the only dev) am currently in college focusing heavily on career and internship preparation. I graduate in 2029. Consequently, active logic commits will not begin for a few years at the earliest and none before 2029. Do not open PRs or Issues at this time. Discussions are welcome. Thank you for your understanding. 
 > 
 > Additionally, **this repository is a public mirror** meant for tracking stable milestones. Daily active development occurs entirely inside a private workspace and will be pushed here only when major checkpoints are cleared. Nobody is permitted to use the private repo at any time unless I specifically give you access/permission to do so (as in you want to be a part of the core dev team).
+>
+> Please note that if you want to be apart of the core dev team, you need to be able to commit to this project long term. This is not to say that this must be the only open source thing that you do but just be aware that this is the only expectation.
 
 ---
 
