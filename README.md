@@ -91,7 +91,7 @@ make run
 > 
 > Additionally, **this repository is a public mirror** meant for tracking stable milestones. Daily active development occurs entirely inside a private workspace and will be pushed here only when major checkpoints are cleared. Nobody is permitted to use the private repo at any time unless I specifically give you access/permission to do so (as in you want to be a part of the core dev team).
 >
-> Please note that if you want to be apart of the core dev team, you need to be able to commit to this project long term. This is not to say that this must be the only open source thing that you do but just be aware that this is the only expectation.
+> Please note that if you want to be apart of the core dev team, you need to be able to commit to this project long term. This is not to say that this must be the only open source thing that you do but just be aware that this is the only expectation. Im expecting development to take at least 2-3 decades, probably more. 
 
 ---
 
