@@ -33,6 +33,12 @@ Unlike static hobbyist kernels, every core system and subsystem in StrataOS can 
 
 ---
 
+## 🔬 Language & Subsystem Matrix
+
+See [Link Text](https://github.com/jewboi896-cmyk/StrataOS-public/blob/main/LANGUAGE.md)CONTRIBUTING.md for more info
+
+---
+
 ## 📚 Dual-Track Documentation Blueprint
 
 To maximize educational utility, the project generates and maintains two distinct documentation tracks:
