@@ -22,6 +22,20 @@
 
 **StrataOS** is a monolithic-style custom operating system targeting the `x86_64` architecture, booting via the **Limine Bootloader**. It serves two primary purposes: a personal engineering sandbox and a highly structured educational tool built to help beginners master low-level concepts.
 
+---
+
+## ⚠️ Repository Status Notice (Read Before Viewing)
+
+> **Important**: This project is in its early architectural planning phases. 
+> 
+> I (the only dev) am currently in college focusing heavily on career and internship preparation. I graduate in 2029. Consequently, active logic commits will not begin for a few years at the earliest and none before 2029. Do not open PRs or Issues at this time. Discussions are welcome. Thank you for your understanding. 
+> 
+> Additionally, **this repository is a public mirror** meant for tracking stable milestones. Daily active development occurs entirely inside a private workspace and will be pushed here only when major checkpoints are cleared. Nobody is permitted to use the private repo at any time unless I specifically give you access/permission to do so (as in you want to be a part of the core dev team).
+>
+> Please note that if you want to be apart of the core dev team, you need to be able to commit to this project long term. This is not to say that this must be the only open source thing that you do but just be aware that this is the only expectation. Im expecting development to take at least 2-3 decades, probably more.
+
+---
+
 ### 🔄 The Swappable Strata System
 
 See [SYSTEM.md](https://github.com/jewboi896-cmyk/StrataOS-public/blob/main/SYSTEM.md) for more info.
@@ -42,17 +56,7 @@ See [DOCS.md](https://github.com/jewboi896-cmyk/StrataOS-public/blob/main/DOCS.m
 
 ## 🏗 Build & Emulator Infrastructure
 
-See [BUILD.md](https://github.com/jewboi896-cmyk/StrataOS-public/blob/main/BUILD.md) for more info.
-
-## ⚠️ Repository Status Notice (Read Before Viewing)
-
-> **Important**: This project is in its early architectural planning phases. 
-> 
-> I (the only dev) am currently in college focusing heavily on career and internship preparation. I graduate in 2029. Consequently, active logic commits will not begin for a few years at the earliest and none before 2029. Do not open PRs or Issues at this time. Discussions are welcome. Thank you for your understanding. 
-> 
-> Additionally, **this repository is a public mirror** meant for tracking stable milestones. Daily active development occurs entirely inside a private workspace and will be pushed here only when major checkpoints are cleared. Nobody is permitted to use the private repo at any time unless I specifically give you access/permission to do so (as in you want to be a part of the core dev team).
->
-> Please note that if you want to be apart of the core dev team, you need to be able to commit to this project long term. This is not to say that this must be the only open source thing that you do but just be aware that this is the only expectation. Im expecting development to take at least 2-3 decades, probably more. 
+See [BUILD.md](https://github.com/jewboi896-cmyk/StrataOS-public/blob/main/BUILD.md) for more info. 
 
 ---
 
@@ -101,4 +105,6 @@ See [GITLAB.md](https://github.com/jewboi896-cmyk/StrataOS-public/blob/main/GITL
 ## 📜 License
 
 Distributed under the **Apache License 2.0**. See the `LICENSE` file for more details. Everything from the core kernel space to the multi-language driver strata to any user-space apps is open for modification, distribution, and commercial use under these terms.
+
+---
 
