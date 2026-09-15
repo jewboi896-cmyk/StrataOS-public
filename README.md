@@ -35,7 +35,7 @@ Unlike static hobbyist kernels, every core system and subsystem in StrataOS can 
 
 ## 🔬 Language & Subsystem Matrix
 
-See [Link Text](https://github.com/jewboi896-cmyk/StrataOS-public/blob/main/LANGUAGE.md)CONTRIBUTING.md for more info
+See [CONTRIBUTING.md](https://github.com/jewboi896-cmyk/StrataOS-public/blob/main/LANGUAGE.md) for more info
 
 ---
 
