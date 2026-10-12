@@ -7,7 +7,7 @@ these toolchains will become locked for a time.):
 | Language | Current Stable Version (2026) | Notes |
 | :--- | :---: | :--- |
 | C | C23 | Core kernel systems/subsystems, drivers, networking, etc |
-| Rust | 1.98.1 | Filesystem, drivers, certain CLI tools, etc |
+| Rust | 1.99 | Filesystem, drivers, certain CLI tools, etc |
 | C++ | C++23 | drivers, networking, etc |
 | Zig | 0.16.0 | Will not be used until at least 1.0 release and confirmed solid freestanding support |
 | Odin | dev-2026-08 | Same as Zig above |
