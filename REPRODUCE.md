@@ -10,7 +10,7 @@ these toolchains will become locked for a time.):
 | Rust | 1.99 | Filesystem, drivers, certain CLI tools, etc |
 | C++ | C++23 | drivers, networking, etc |
 | Zig | 0.17.0 | Will not be used until at least 1.0 release and confirmed solid freestanding support |
-| Odin | dev-2026-08 | Same as Zig above |
+| Odin | dev-2026-10 | Same as Zig above |
 | C3 | 0.8.4 | Same as both Zig and Odin |
 | Go | 1.27.1 | Networking middleman, user-space apps, etc |
 
