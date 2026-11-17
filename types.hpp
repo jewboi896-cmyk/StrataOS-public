@@ -7,10 +7,30 @@
 #include <cstddef>
 #include <cstdint>
 
+// for the non-null wrapper class
+#include <cassert>
+
 // Core and Null Definitions
 using VOID = void;
 using PVOID = void*;
 using NPTR = delctype(nullptr);
+
+// class for a non-null pointer as C++ doesnt have a built in type and i think it would be generally easier to be able to
+// distinguish explicitly these sorts of things
+class NonNull {
+private:
+   void* ptr;
+public:
+   explicit NonNull(void* ptr) : ptr(ptr) {
+     assert(ptr != nullptr);
+   }
+
+   void* get() const noexcept {
+     return ptr;
+   } 
+};
+
+using NNPTR = NonNull;
 
 // Boolean definition
 using BOOL = std::uint8_t;
