@@ -10,13 +10,13 @@
 typedef void VOID;
 typedef void* PVOID;
 
-#define NULL = nullptr;
-typedef typeof(nullptr) = NPTR;
+#define NULL nullptr
+typedef typeof(nullptr) NPTR;
 
 // boolean definition
-typedef uint8_t = BOOL, *PBOOL;
-#define TRUE = 1;
-#define FALSE = 0;
+typedef uint8_t BOOL, *PBOOL;
+#define TRUE 1;
+#define FALSE 0;
 
 // Fixed Width Integer Types
 typedef uint8_t U8, *PU8;
@@ -48,18 +48,19 @@ typedef uint16_t USHORT, *PUSHORT;
 typedef int64_t LONG, *PLONG;
 typedef int64_t SLONG, *PSLONG;
 typedef uint64_t ULONG, *PULONG;
-typedef int64_t LLONG, *PSLLONG;
-typedef uint64_t ULLONG *PULLONG;
+typedef int64_t LLONG, *PLLONG;
+typedef int64_t SLLONG, *PSLLONG;
+typedef uint64_t ULLONG, *PULLONG;
 
 // Floating Point Definitions
 // These should not be used inside of the core of the kernel as they use FPU/SSE/AVX registers which are usually 
 // not saved during a context switch
-#ifdef STRATA_KERNEL_CORE_TYPES
-typedef float FLOAT, *PFLOAT; // 4 bytes
-typedef double DOUBLE, *PDOUBLE; // 8 bytes
+#ifndef STRATA_KERNEL_CORE_TYPES
+  typedef float FLOAT, *PFLOAT; // 4 bytes
+  typedef double DOUBLE, *PDOUBLE; // 8 bytes
 
-// avoid using LDOUBLE across FFI boundaries between C and the other languages used in this OS
-typedef long double LDOUBLE, *PLDOUBLE; // 16 bytes
+  // avoid using LDOUBLE across FFI boundaries between C and the other languages used in this OS
+  typedef long double LDOUBLE, *PLDOUBLE; // 16 bytes
 #endif
 
 // Memory, Address & Size Types - All 8 bytes
@@ -79,10 +80,10 @@ typedef const char** PCSTR;
 // HANDLE definition. Im borrowing from the Windows API that uses opaque pointers to files as a void pointer named HANDLE
 typedef PVOID HANDLE, *PHANDLE;
 
-#define INVALID_HANDLE ((HANDLE)(IPTR) - 1);
-#define IS_VALID_HANDLE(handle) ((handle) != nullptr && (handle) != INVALID_HANDLE);
+#define INVALID_HANDLE ((HANDLE)(IPTR) - 1)
+#define IS_VALID_HANDLE(handle) ((handle) != nullptr && (handle) != INVALID_HANDLE)
 
-#define STRATA_DECLARE_HANDLE(name) \ typedef struct name##__ { int unused; } *name, **P##name;
+#define STRATA_DECLARE_HANDLE(name) \ typedef struct name##__ { int unused; } *name, **P##name
 
 // Define each handle
 STRATA_DECLARE_HANDLE(H_PROCESS); // Handle to a process
@@ -131,19 +132,19 @@ typedef I32 STATUS, *PSTATUS;
 #define STRATA_SYSTEM 0x07U
 #define STRATA_SECURITY 0x08U
 #define STRATA_LOADER 0x09U /* lib and driver modules */
-#define STRATA_INTERRPUT 0x0AU
+#define STRATA_INTERRUPT 0x0AU
 #define STRATA_TIMER 0x0BU
 #define STRATA_IO 0x0CU
 
 #define MAKE_STATUS(severity, status_level, code) \ ((STATUS) ((((U32)(severity) & 0x3U) << 30) | \ 
                                                     (((U32)(status_level) & 0x3FU) << 24) | \ 
-                                                    (((U32)(code) & 0xFFFFFFU)))); 
+                                                    (((U32)(code) & 0xFFFFFFU)))) 
 
-#define STATUS_OK(status) ((STATUS)(status) >= 0);
-#define STATUS_FAILED(status) ((STATUS)(status) < 0);
-#define STATUS_SEVERITY(status) (((U32)(status) >> 30) & 0x3U);
-#define STATUS_STRATA(status) (((U32)(status) >> 24) & 0x3FU);
-#define STATUS_CODE(status) ((U32)(status) & 0xFFFFFFU);
+#define STATUS_OK(status) ((STATUS)(status) >= 0)
+#define STATUS_FAILED(status) ((STATUS)(status) < 0)
+#define STATUS_SEVERITY(status) (((U32)(status) >> 30) & 0x3U)
+#define STATUS_STRATA(status) (((U32)(status) >> 24) & 0x3FU)
+#define STATUS_CODE(status) ((U32)(status) & 0xFFFFFFU)
 
 // Define all of the different statuses that could occur
 #define STATUS_SUCCESS MAKE_STATUS(STATUS_SEVERITY_SUCCESS, STRATA_CORE, 0x000000)
@@ -168,4 +169,6 @@ static_assert(sizeof(LONG) == 8, "LONG must be 8 bytes on a 64 bit target archit
 static_assert(sizeof(BOOL) == 1, "BOOL must be 1 byte on a 64 bit target architecture");
 static_assert(sizeof(HANDLE) == 8, "HANDLE must be 8 bytes");
 static_assert(sizeof(H_FILE) == 8, "Opaque handle must be 8 bytes");
-static_assert(sizeof(STATUS) == 4, "STATUS must be 5 bytes");
+static_assert(sizeof(STATUS) == 4, "STATUS must be 4 bytes");
+
+#endif
