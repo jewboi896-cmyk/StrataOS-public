@@ -10,6 +10,9 @@
 // for the non-null wrapper class
 #include <cassert>
 
+// for the optional null pointer
+#include <optional>
+
 // Core and Null Definitions
 using VOID = void;
 using PVOID = void*;
@@ -31,6 +34,8 @@ public:
 };
 
 using NNPTR = NonNull;
+
+using OPTNPTR = std::optional<NonNull>;
 
 // Boolean definition
 using BOOL = std::uint8_t;
