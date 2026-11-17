@@ -1,5 +1,5 @@
-#ifndef STRATA_TYPES_H
-#define STRATA_TYPES_H
+#ifndef STRATA_TYPES_C_H
+#define STRATA_TYPES_C_H
 
 #pragma once
 
