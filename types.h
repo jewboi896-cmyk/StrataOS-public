@@ -15,8 +15,8 @@ typedef typeof(nullptr) NPTR;
 
 // boolean definition
 typedef uint8_t BOOL, *PBOOL;
-#define TRUE 1;
-#define FALSE 0;
+#define TRUE 1
+#define FALSE 0
 
 // Fixed Width Integer Types
 typedef uint8_t U8, *PU8;
