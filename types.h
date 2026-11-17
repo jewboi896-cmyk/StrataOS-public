@@ -14,6 +14,8 @@ typedef void* PVOID;
 typedef typeof(nullptr) NPTR;
 // A typedef for a non-null pointer, C doesnt have a built in type so actual enforcement needs to come through methods and runtime checks
 typedef void* NNPTR;
+// typedef for an optional null pointer. again C doesnt have a built in type so its aliased as a void pointer
+typedef void* OPTNPTR;
 
 // boolean definition
 typedef uint8_t BOOL, *PBOOL;
