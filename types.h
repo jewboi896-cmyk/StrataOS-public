@@ -11,7 +11,7 @@ typedef void VOID;
 typedef void* PVOID;
 
 #define NULL = nullptr;
-typedef typeof(nulltpr) = NPTR;
+typedef typeof(nullptr) = NPTR;
 
 // boolean definition
 typedef uint8_t = BOOL, *PBOOL;
