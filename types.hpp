@@ -28,7 +28,7 @@ using PI8 = I8*;
 using U16 = std::uint16_t;
 using PU16 = U16*;
 using I16 = std::int16_t;
-using PI6 = I16*;
+using PI16 = I16*;
 
 using U32 = std::uint32_t;
 using PU32 = U32*;
@@ -205,7 +205,7 @@ inline constexpr U32 STRATA_IO = 0x0CU;
   return status >= 0;
 }
 
-[[no-discard]] constexpr bool STATUS_FALIED(STATUS status) noexcept {
+[[no-discard]] constexpr bool STATUS_FAILED(STATUS status) noexcept {
   return status < 0;
 }
 
