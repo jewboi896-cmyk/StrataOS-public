@@ -13,6 +13,8 @@ pub type PVOID = *mut c_void;
 pub type OPTNPTR = Option<NonNull<c_void>>;
 // because of the reason above, this is a guaranteed non-null pointer
 pub type NNPTR = NonNull<c_void>;
+// An actual null pointer
+pub type NPTR = core::ptr::null();
 
 // Boolean Type Definitions
 pub type BOOL = u8;
