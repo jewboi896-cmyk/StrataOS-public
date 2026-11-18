@@ -156,7 +156,7 @@ using PHANDLE = HANDLE*;
 // The conversion is implementation defined so its intentionally not marked as constexpr
 inline HANDLE const INVALID_HANDLE = reinterpret_cast<HANDLE>(static_cast<UPTR>(~UPTR{0}));
 
-[[nodiscard]] inline bool IS_VALID_HANDLE(HANDLE handle) noexcept {
+[[nodiscard]] inline bool IS_VALID_HANDLE(const HANDLE handle) noexcept {
   return handle != nullptr && handle  != INVALID_HANDLE;
 }
 
@@ -219,28 +219,28 @@ inline constexpr U32 STRATA_INTERRUPT = 0x0AU;
 inline constexpr U32 STRATA_TIMER = 0x0BU;
 inline constexpr U32 STRATA_IO = 0x0CU;
 
-[[nodiscard]] constexpr STATUS MAKE_STATUS(U32 severity, U32 status_level, U32 code) noexcept {
+[[nodiscard]] constexpr STATUS MAKE_STATUS(const U32 severity, const U32 status_level, const U32 code) noexcept {
   const U32 value = ((severity & 0x3U) << 30U) | ((status_level & 0x3FU) << 24U) | (code & 0xFFFFFFU);
   return static_cast<STATUS>(value);
 }
 
-[[nodiscard]] constexpr bool STATUS_OK(STATUS status) noexcept {
+[[nodiscard]] constexpr bool STATUS_OK(const STATUS status) noexcept {
   return status >= 0;
 }
 
-[[nodiscard]] constexpr bool STATUS_FAILED(STATUS status) noexcept {
+[[nodiscard]] constexpr bool STATUS_FAILED(const STATUS status) noexcept {
   return status < 0;
 }
 
-[[nodiscard]] constexpr U32 STATUS_SEVERITY(STATUS status) noexcept {
+[[nodiscard]] constexpr U32 STATUS_SEVERITY(const STATUS status) noexcept {
   return (static_cast<U32>(status) >> 30U) & 0x3U;
 }
 
-[[nodiscard]] constexpr U32 STATUS_STRATA(STATUS status) noexcept {
+[[nodiscard]] constexpr U32 STATUS_STRATA(const STATUS status) noexcept {
   return (static_cast<U32>(status) >> 24U) & 0x3FU;
 }
 
-[[nodiscard]] constexpr U32 STATUS_CODE(STATUS status) noexcept {
+[[nodiscard]] constexpr U32 STATUS_CODE(const STATUS status) noexcept {
   return static_cast<U32>(status) & 0xFFFFFFU;
 }
 
