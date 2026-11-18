@@ -90,7 +90,7 @@ typedef PVOID HANDLE, *PHANDLE;
 #define INVALID_HANDLE ((HANDLE)(IPTR) - 1)
 #define IS_VALID_HANDLE(handle) ((handle) != nullptr && (handle) != INVALID_HANDLE)
 
-#define STRATA_DECLARE_HANDLE(name) \ typedef struct name##__ { int unused; } *name, **P##name
+#define STRATA_DECLARE_HANDLE(name) typedef struct name##__ { int unused; } *name, **P##name
 
 // Define each handle
 STRATA_DECLARE_HANDLE(H_PROCESS); // Handle to a process
@@ -143,7 +143,7 @@ typedef I32 STATUS, *PSTATUS;
 #define STRATA_TIMER 0x0BU
 #define STRATA_IO 0x0CU
 
-#define MAKE_STATUS(severity, status_level, code) \ ((STATUS) ((((U32)(severity) & 0x3U) << 30) | \ 
+#define MAKE_STATUS(severity, status_level, code) ((STATUS) ((((U32)(severity) & 0x3U) << 30) | \ 
                                                     (((U32)(status_level) & 0x3FU) << 24) | \ 
                                                     (((U32)(code) & 0xFFFFFFU)))) 
 
