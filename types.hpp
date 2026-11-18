@@ -3,6 +3,9 @@
 
 #pragma once
 
+// General Rule: Anything that has P prefixed onto it represents a pointer, U represents the unsigned version of the type, 
+// and I represents the signed version of the type type
+
 // Provides primitive definitions
 #include <cstddef>
 #include <cstdint>
