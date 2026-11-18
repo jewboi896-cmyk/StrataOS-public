@@ -147,11 +147,11 @@ typedef I32 STATUS, *PSTATUS;
                                                     (((U32)(status_level) & 0x3FU) << 24) | \ 
                                                     (((U32)(code) & 0xFFFFFFU)))) 
 
-#define STATUS_OK(status) ((STATUS)(status) >= 0)
-#define STATUS_FAILED(status) ((STATUS)(status) < 0)
-#define STATUS_SEVERITY(status) (((U32)(status) >> 30) & 0x3U)
-#define STATUS_STRATA(status) (((U32)(status) >> 24) & 0x3FU)
-#define STATUS_CODE(status) ((U32)(status) & 0xFFFFFFU)
+static inline BOOL STATUS_OK(const STATUS status) { return status >= 0; }
+static inline BOOL STATUS_FAILED(const STATUS status) { return status < 0; }
+static inline U32 STATUS_SEVERITY(const STATUS status) { return ((U32) status >> 30U) & 0x3U;}
+static inline U32 STATUS_STRATA(STATUS status) { return ((U32) status >> 24U) & 0x3FU; }
+static inline U32 STATUS_CODE(STATUS status) { return (U32) status & 0xFFFFFFU; }
 
 // Define all of the different statuses that could occur
 #define STATUS_SUCCESS MAKE_STATUS(STATUS_SEVERITY_SUCCESS, STRATA_CORE, 0x000000)
@@ -171,7 +171,7 @@ typedef I32 STATUS, *PSTATUS;
 // more will probably be added later/eventually
 
 // Compile time architecture checks so that as much can fail at compile time rather then runtime
-static_assert(sizeof(PVOID) == 8, "StrataOS requires a 64 bit target architecture");
+static_assert(sizeof(PVOID) == 8, "64-bit architecture required");
 static_assert(sizeof(LONG) == 8, "LONG must be 8 bytes on a 64 bit target architecture");
 static_assert(sizeof(BOOL) == 1, "BOOL must be 1 byte on a 64 bit target architecture");
 static_assert(sizeof(HANDLE) == 8, "HANDLE must be 8 bytes");
