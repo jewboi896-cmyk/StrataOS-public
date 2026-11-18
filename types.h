@@ -153,8 +153,8 @@ static inline STATUS MAKE_STATUS(const U32 severity, const U32 status_level, con
 static inline BOOL STATUS_OK(const STATUS status) { return status >= 0; }
 static inline BOOL STATUS_FAILED(const STATUS status) { return status < 0; }
 static inline U32 STATUS_SEVERITY(const STATUS status) { return ((U32) status >> 30U) & 0x3U;}
-static inline U32 STATUS_STRATA(STATUS status) { return ((U32) status >> 24U) & 0x3FU; }
-static inline U32 STATUS_CODE(STATUS status) { return (U32) status & 0xFFFFFFU; }
+static inline U32 STATUS_STRATA(const STATUS status) { return ((U32) status >> 24U) & 0x3FU; }
+static inline U32 STATUS_CODE(const STATUS status) { return (U32) status & 0xFFFFFFU; }
 
 // Define all of the different statuses that could occur
 #define STATUS_SUCCESS MAKE_STATUS(STATUS_SEVERITY_SUCCESS, STRATA_CORE, 0x000000)
