@@ -129,7 +129,7 @@ pub type PHANDLE = *mut HANDLE;
 // Never dereference this value
 pub const INVALID_HANDLE: HANDLE = usize::MAX as HANDLE;
 
-#[must-use]
+#[must_use]
 #[inline]
 pub const fn IS_VALID_HANDLE(handle: HANDLE) -> bool {
   !handle.is_null() && handle != INVALID_HANDLE
