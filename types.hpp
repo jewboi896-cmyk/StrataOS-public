@@ -28,7 +28,7 @@ private:
    void* ptr;
 public:
    explicit NonNull(void* ptr) : ptr(ptr) { assert(ptr != nullptr); }
-   void* get() const noexcept { return ptr; } 
+   void* getPtr() const noexcept { return ptr; } 
 };
 
 using NNPTR = NonNull;
