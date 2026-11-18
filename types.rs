@@ -14,7 +14,7 @@ pub type OPTNPTR = Option<NonNull<c_void>>;
 // because of the reason above, this is a guaranteed non-null pointer
 pub type NNPTR = NonNull<c_void>;
 // An actual null pointer
-pub type NPTR = core::ptr::null();
+#[repr(C)] pub struct NPTR;
 
 // Boolean Type Definitions
 pub type BOOL = u8;
@@ -91,7 +91,7 @@ pub type FLOAT = f32;
 #[cfg(not(feature = "strata-kernel-core-types"))]
 pub type PFLOAT = *mut FLOAT;
 #[cfg(not(feature = "strata-kernel-core-types"))]
-pub type DOUBLE = f32;
+pub type DOUBLE = f64;
 #[cfg(not(feature = "strata-kernel-core-types"))]
 pub type PDOUBLE = *mut DOUBLE;
 // Rust has no portable primitive equivalent to C++ `long double`.
@@ -124,12 +124,12 @@ pub type PCSTR = *mut CSTR;
 pub type HANDLE = PVOID;
 pub type PHANDLE = *mut HANDLE;
 // Never dereference this value
-pub type INVALID_HANDLE: HANDLE = usize::MAX as HANDLE;
+pub const INVALID_HANDLE: HANDLE = usize::MAX as HANDLE;
 
 #[must-use]
 #[inline]
-pub const fn IS_HANDLE_VALID(handle: HANDLE) -> bool {
-  !handle.is_null() && handle != INVALID_HANDLE;
+pub const fn IS_VALID_HANDLE(handle: HANDLE) -> bool {
+  !handle.is_null() && handle != INVALID_HANDLE
 }
 
 // Distinct opaque handle wrappers. repr(transparent) preserves pointer ABI
@@ -149,7 +149,7 @@ macro_rules! strata_declare_handle {
 
       #[must-use]
       #[inline]
-      pub const fn as_ptr(self) -> *mut opaque { self.0 }
+      pub const fn as_ptr(self) -> *mut $opaque { self.0 }
 
       #[must-use]
       #[inline]
@@ -194,7 +194,7 @@ pub type PSTATUS = *mut STATUS;
 pub const STRATA_SEVERITY_SUCCESS: U32 = 0x0;
 pub const STRATA_SEVERITY_INFO: U32 = 0x1;
 pub const STRATA_SEVERITY_WARNING: U32 = 0x2;
-pub const STRATA_SEVERITY_ERROR = 0x3;
+pub const STRATA_SEVERITY_ERROR: U32 = 0x3;
 
 // The strata where the status occured in
 pub const STRATA_CORE: U32 = 0x00;
@@ -263,8 +263,8 @@ const _: () = {
   assert!(core::mem::size_of::<HANDLE>() == 8, "HANDLE must be 8 bytes");
   assert!(core::mem::size_of::<H_FILE>() == 8, "Opaque handles must be 8 bytes");
   assert!(core::mem::size_of::<STATUS>() == 4, "STATUS must be 4 bytes");
-  assert!(core::mem::sizeof::<SIZE>() == 8, "SIZE must be 8 bytes");
-  assert!(core::mem::sizeof::<SSIZE>() == 8, "SSIZE must be 8 bytes");
-  assert!(core::mem::sizeof::<UPTR>() == 8, "UPTR must be 8 bytes");
-  assert!(core::mem::sizeof::<IPTR>() == 8, "IPTR must be 8 bytes");
-}
+  assert!(core::mem::size_of::<SIZE>() == 8, "SIZE must be 8 bytes");
+  assert!(core::mem::size_of::<SSIZE>() == 8, "SSIZE must be 8 bytes");
+  assert!(core::mem::size_of::<UPTR>() == 8, "UPTR must be 8 bytes");
+  assert!(core::mem::size_of::<IPTR>() == 8, "IPTR must be 8 bytes");
+};
