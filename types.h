@@ -88,7 +88,9 @@ typedef const char** PCSTR;
 typedef PVOID HANDLE, *PHANDLE;
 
 #define INVALID_HANDLE ((HANDLE)(IPTR) - 1)
-#define IS_VALID_HANDLE(handle) ((handle) != nullptr && (handle) != INVALID_HANDLE)
+static inline BOOL IS_VALID_HANDLE(const HANDLE handle) {
+  return handle != NPTR && handle != INVALID_HANDLE;
+}
 
 #define STRATA_DECLARE_HANDLE(name) typedef struct name##__ { int unused; } *name, **P##name
 
@@ -143,9 +145,10 @@ typedef I32 STATUS, *PSTATUS;
 #define STRATA_TIMER 0x0BU
 #define STRATA_IO 0x0CU
 
-#define MAKE_STATUS(severity, status_level, code) ((STATUS) ((((U32)(severity) & 0x3U) << 30) | \ 
-                                                    (((U32)(status_level) & 0x3FU) << 24) | \ 
-                                                    (((U32)(code) & 0xFFFFFFU)))) 
+static inline STATUS MAKE_STATUS(const U32 severity, const U32 status_level, const U32 code) {
+  const U32 value = ((severity & 0x3U) << 30U) | ((status_level & 0x3FU) << 24U) | (code & 0xFFFFFFU);
+  return (STATUS) value;
+} 
 
 static inline BOOL STATUS_OK(const STATUS status) { return status >= 0; }
 static inline BOOL STATUS_FAILED(const STATUS status) { return status < 0; }
