@@ -2,6 +2,9 @@
 #![allow(non_camel_case_types)]
 #![allow(non-snake-case)]
 
+// General Rule: Anything that has P prefixed onto it represents a pointer, U represents the unsigned version of the type, 
+// and I represents the signed version of the type type
+
 use core::ffi::{c_char, c_void};
 use core::ptr::NonNull;
 
