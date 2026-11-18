@@ -4,7 +4,7 @@
 #pragma once
 
 // General Rule: Anything that has P prefixed onto it represents a pointer, U represents the unsigned version of the type, 
-// and I represents the signed version of the type type
+// and I or S represents the signed version of the type type
 
 // Provides the primitive definitions
 #include <stdint.h>
