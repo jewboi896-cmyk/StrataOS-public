@@ -21,60 +21,91 @@ typedef void* NNPTR;
 typedef void* OPTNPTR;
 
 // boolean definition
-typedef uint8_t BOOL, *PBOOL;
+typedef uint8_t BOOL;
+typedef uint8_t* PBOOL;
 #define TRUE 1
 #define FALSE 0
 
 // Fixed Width Integer Types
-typedef uint8_t U8, *PU8;
-typedef int8_t I8, *PI8;
+typedef uint8_t U8;
+typedef uint8_t* PU8;
+typedef int8_t I8;
+typedef int8_t* PI8;
 
-typedef uint16_t U16, *PU16;
-typedef int16_t I16, *PI16;
+typedef uint16_t U16;
+typedef uint16_t* PU16;
+typedef int16_t I16;
+typedef int16_t* PI16;
 
-typedef uint32_t U32, *PU32;
-typedef int32_t I32, *PI32;
+typedef uint32_t U32;
+typedef uint32_t* PU32;
+typedef int32_t I32;
+typedef int32_t* PI32;
 
-typedef uint64_t U64, *PU64;
-typedef int64_t I64, *PI64;
+typedef uint64_t U64;
+typedef uint64_t* PU64;
+typedef int64_t I64;
+typedef int64_t* PI64;
 
 // Byte and Character Types
-typedef uint8_t BYTE, *PBYTE;
-typedef uint8_t UBYTE, *PUBYTE;
-typedef int8_t SBYTE, *PSBYTE;
+typedef uint8_t BYTE;
+typedef uint8_t* PBYTE;
+typedef uint8_t UBYTE;
+typedef uint8_t* PUBYTE;
+typedef int8_t SBYTE;
+typedef int8_t* PSBYTE;
 
-typedef char CHAR, *PCHAR;
-typedef signed char SCHAR, *PSCHAR;
-typedef unsigned char UCHAR, *PUCHAR;
+typedef char CHAR;
+typedef char* PCHAR;
+typedef signed char SCHAR;
+typedef signed char* PSCHAR;
+typedef unsigned char UCHAR;
+typedef unsigned char* PUCHAR;
 
 // Standard Integer Aliases
-typedef int16_t SHORT, *PSHORT;
-typedef int16_t SSHORT, *PSSHORT;
-typedef uint16_t USHORT, *PUSHORT;
+typedef int16_t SHORT;
+typedef int16_t* PSHORT;
+typedef int16_t SSHORT;
+typedef int16_t* PSSHORT;
+typedef uint16_t USHORT;
+typedef uint16_t* PUSHORT;
 
-typedef int64_t LONG, *PLONG;
-typedef int64_t SLONG, *PSLONG;
-typedef uint64_t ULONG, *PULONG;
-typedef int64_t LLONG, *PLLONG;
-typedef int64_t SLLONG, *PSLLONG;
-typedef uint64_t ULLONG, *PULLONG;
+typedef int64_t LONG;
+typedef int64_t* PLONG;
+typedef int64_t SLONG;
+typedef int64_t* PSLONG;
+typedef uint64_t ULONG;
+typedef uint64_t* PULONG;
+typedef int64_t LLONG;
+typedef int64_t* PLLONG;
+typedef int64_t SLLONG;
+typedef int64_t* PSLLONG;
+typedef uint64_t ULLONG;
+typedef uint64_t* PULLONG;
 
 // Floating Point Definitions
 // These should not be used inside of the core of the kernel as they use FPU/SSE/AVX registers which are usually 
 // not saved during a context switch
 #ifndef STRATA_KERNEL_CORE_TYPES
-  typedef float FLOAT, *PFLOAT; // 4 bytes
-  typedef double DOUBLE, *PDOUBLE; // 8 bytes
+  typedef float FLOAT; // 4 bytes
+  typedef float* PFLOAT;
+  typedef double DOUBLE; // 8 bytes
+  typedef double* PDOUBLE;
 
   // avoid using LDOUBLE across FFI boundaries between C and the other languages used in this OS
-  typedef long double LDOUBLE, *PLDOUBLE; // 16 bytes
+  typedef long double LDOUBLE; // 16 bytes
+  typedef long double* PLDOUBLE;
 #endif
 
 // Memory, Address & Size Types - All 8 bytes
-typedef uint64_t SIZE, *PSIZE;
-typedef int64_t SSIZE, *PSSIZE;
-typedef uintptr_t UPTR, *PUPTR;
-typedef intptr_t IPTR, *PIPTR;
+typedef uint64_t SIZE;
+typedef uint64_t* PSIZE;
+typedef int64_t SSIZE;
+typedef int64_t* PSSIZE;
+typedef uintptr_t UPTR;
+typedef uintptr_t* PUPTR;
+typedef intptr_t IPTR;
+typedef intptr_t* PIPTR;
 
 // C String aliases because C dosent have a built in String class like C++ or Java.
 // C treats Strings as arrays of characters so that is what i will do
@@ -85,7 +116,8 @@ typedef const char* CSTR;
 typedef const char** PCSTR;
 
 // HANDLE definition. Im borrowing from the Windows API that uses opaque pointers to files as a void pointer named HANDLE
-typedef PVOID HANDLE, *PHANDLE;
+typedef PVOID HANDLE;
+typedef HANDLE* PHANDLE;
 
 #define INVALID_HANDLE ((HANDLE)(IPTR) - 1)
 static inline BOOL IS_VALID_HANDLE(const HANDLE handle) { return handle != NPTR && handle != INVALID_HANDLE; }
@@ -123,7 +155,8 @@ STRATA_DECLARE_HANDLE(H_TOKEN); // Handle to a token for security and stuff
 // more will probably be added later/eventually
 
 // Define STATUS return codes - Bit Packed Signed 32 bit integers
-typedef I32 STATUS, *PSTATUS;
+typedef I32 STATUS;
+typedef I32* PSTATUS;
 
 #define STRATA_SEVERITY_SUCCESS 0x0U
 #define STRATA_SEVERITY_INFO 0x1U
