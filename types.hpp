@@ -4,7 +4,7 @@
 #pragma once
 
 // General Rule: Anything that has P prefixed onto it represents a pointer, U represents the unsigned version of the type, 
-// and I or S represents the signed version of the type type
+// and I or S represents the signed version of the type
 
 // Provides primitive definitions
 #include <cstddef>
@@ -19,9 +19,9 @@
 // Core and Null Definitions
 using VOID = void;
 using PVOID = void*;
-using NPTR = delctype(nullptr);
+using NPTR = decltype(nullptr);
 
-// class for a non-null pointer as C++ doesnt have a built in type and i think it would be generally easier to be able to
+// class for a non-null pointer as C++ doesnt have a built-in type and i think it would be generally easier to be able to
 // distinguish explicitly these sorts of things
 class NonNull {
 private:
