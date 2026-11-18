@@ -113,7 +113,7 @@ using PULLONG = ULLONG*;
 // Floating Point Definitions
 // These should not be used inside the kernel core because they may use
 // FPU/SSE/AVX registers, which are not necessarily saved during a context
-// switch. Define STRATA_KERNEL_CORE_TYPES to omit these aliases
+// switch.
 #ifndef STRATA_KERNEL_CORE_TYPES
   using FLOAT = float;
   using PFLOAT = FLOAT*;
