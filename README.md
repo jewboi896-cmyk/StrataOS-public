@@ -20,7 +20,7 @@
 
 ## 🏛 Project Overview & Philosophy
 
-**StrataOS** is a monolithic-style custom operating system targeting the `x86_64` architecture, booting via the **Limine Bootloader**. It serves two primary purposes: a personal engineering sandbox and a highly structured educational tool built to help beginners master low-level concepts.
+**StrataOS** is a monolithic-style custom operating system targeting the x86_64 architecture, booting via the **Limine Bootloader**. It serves two primary purposes: a personal engineering sandbox and a highly structured educational tool built to help beginners master low-level concepts.
 
 ---
 
