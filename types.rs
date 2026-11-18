@@ -163,6 +163,7 @@ macro_rules! strata_declare_handle {
   };
 }
 
+// Order is: HANDLE_NAME, OPAQUE_NAME, POINTER_NAME
 strata_declare_handle!(H_PROCESS, H_PROCESS__, PH_PROCESS);
 strata_declare_handle!(H_THREAD, H_THREAD__, PH_THREAD);
 strata_declare_handle!(H_FILE, H_FILE__, PH_FILE);
