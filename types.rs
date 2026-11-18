@@ -194,7 +194,9 @@ strata_declare_handle!(H_TOKEN, H_TOKEN__, PH_TOKEN);
 pub type STATUS = I32;
 pub type PSTATUS = *mut STATUS;
 
-// All of the different statuses
+// Status return codes
+// Layout: 2 severity bits, 6 subsystem bits, and 24 code bits
+// The result is stored as a signed 32-bit integer
 pub const STRATA_SEVERITY_SUCCESS: U32 = 0x0;
 pub const STRATA_SEVERITY_INFO: U32 = 0x1;
 pub const STRATA_SEVERITY_WARNING: U32 = 0x2;
