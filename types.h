@@ -88,9 +88,7 @@ typedef const char** PCSTR;
 typedef PVOID HANDLE, *PHANDLE;
 
 #define INVALID_HANDLE ((HANDLE)(IPTR) - 1)
-static inline BOOL IS_VALID_HANDLE(const HANDLE handle) {
-  return handle != NPTR && handle != INVALID_HANDLE;
-}
+static inline BOOL IS_VALID_HANDLE(const HANDLE handle) { return handle != NPTR && handle != INVALID_HANDLE; }
 
 #define STRATA_DECLARE_HANDLE(name) typedef struct name##__ { int unused; } *name, **P##name
 
