@@ -158,6 +158,9 @@ STRATA_DECLARE_HANDLE(H_TOKEN); // Handle to a token for security and stuff
 typedef I32 STATUS;
 typedef I32* PSTATUS;
 
+// Status return codes
+// Layout: 2 severity bits, 6 subsystem bits, and 24 code bits
+// The result is stored as a signed 32-bit integer
 #define STRATA_SEVERITY_SUCCESS 0x0U
 #define STRATA_SEVERITY_INFO 0x1U
 #define STRATA_SEVERITY_WARNING 0x2U
