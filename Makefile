@@ -191,12 +191,12 @@ iso: kernel directories
     @echo "Prepping ISO Staging Directory..."
 
     rm -rf "$(ISO_STAGING_DIRECTORY)"
-    mkdir -p "S(ISO_STAGING_DIRECTORY)/boot/limine"
+    mkdir -p "$(ISO_STAGING_DIRECTORY)/boot/limine"
 
     cp "$(KERNEL_ELF)" "$(ISO_STAGING_DIRECTORY)/boot/kernel.elf"
     cp "$(LIMINE_CONFIG)" "S(ISO_STAGING_DIRECTORY)/limine.conf"
 
-    cp -R "$(LIMINE_DIRECTORY)/." "$(ISO_STAGING_DIECTORY)/boot/limine"
+    cp -R "$(LIMINE_DIRECTORY)/." "$(ISO_STAGING_DIRECTORY)/boot/limine"
 
     @echo "Generating StrataOS ISO..."
 
