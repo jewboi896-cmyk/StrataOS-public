@@ -90,20 +90,20 @@ pub type PULLONG = *mut ULLONG;
 // Enable the Cargo feature to omit floating point alias types in the core kernel sections
 // They can use FPU/SSE/AVX registers, which are not necessarily saved during a context switch
 #[cfg(not(feature = "strata-kernel-core-types"))]
-pub type FLOAT = f32;
-#[cfg(not(feature = "strata-kernel-core-types"))]
-pub type PFLOAT = *mut FLOAT;
-#[cfg(not(feature = "strata-kernel-core-types"))]
-pub type DOUBLE = f64;
-#[cfg(not(feature = "strata-kernel-core-types"))]
-pub type PDOUBLE = *mut DOUBLE;
+mod floating_point_types {
+  pub type FLOAT = f32;
+  pub type PFLOAT = *mut FLOAT;
+  pub type DOUBLE = f64;
+  pub type PDOUBLE = *mut DOUBLE;
 
-// Rust has no portable primitive equivalent to C++ `long double`.
-// f64 is used as an explicit approximation; it may have less precision.
+  // Rust has no portable primitive equivalent to C++ `long double`.
+  // f64 is used as an explicit approximation; it may have less precision
+  pub type LDOUBLE = f64;
+  pub type PLDOUBLE = *mut LDOUBLE;
+}
+
 #[cfg(not(feature = "strata-kernel-core-types"))]
-pub type LDOUBLE = f64;
-#[cfg(not(feature = "strata-kernel-core-types"))]
-pub type PLDOUBLE = *mut LDOUBLE;
+pub use floating_point_types::*;
 
 // Size Type Definitions
 pub type SIZE = u64;
