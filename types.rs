@@ -97,6 +97,7 @@ pub type PFLOAT = *mut FLOAT;
 pub type DOUBLE = f64;
 #[cfg(not(feature = "strata-kernel-core-types"))]
 pub type PDOUBLE = *mut DOUBLE;
+
 // Rust has no portable primitive equivalent to C++ `long double`.
 // f64 is used as an explicit approximation; it may have less precision.
 #[cfg(not(feature = "strata-kernel-core-types"))]
