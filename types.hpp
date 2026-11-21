@@ -12,6 +12,9 @@
 // for the optional null pointer
 #include <optional>
 
+// for the bit cast in the MAKE_STATUS method defined later in this file
+#include <bit>
+
 
 namespace strata::types {
    namespace core {
@@ -27,8 +30,8 @@ namespace strata::types {
       private:
          T* ptr;
       public:
-         explicit NonNull(T* ptr) : ptr(ptr) { assert(ptr != nullptr); }
-         [[nodiscard]] T* getPtr() const noexcept { return ptr; } 
+         explicit NonNull(T* ptr) noexcept : pointer(ptr) { assert(ptr != nullptr); }
+         [[nodiscard]] T* getPtr() const noexcept { return pointer; } 
       };
       
       using NNPTR = NonNull<void>;
@@ -177,7 +180,7 @@ namespace strata::types {
       // The reserved invalid generic handle representation
       // The conversion is implementation defined so its intentionally not marked as constexpr
       // representation assumes the target architecture and ABI support the chosen invalid-handle convention
-      inline HANDLE const INVALID_HANDLE = reinterpret_cast<HANDLE>(static_cast<pointers::UPTR>(~UPTR{0}));
+      inline HANDLE const INVALID_HANDLE = reinterpret_cast<HANDLE>(static_cast<pointers::UPTR>(~pointers::UPTR{0}));
       
       [[nodiscard]] inline bool IS_VALID_HANDLE(HANDLE handle) noexcept {
         return handle != nullptr && handle != INVALID_HANDLE;
@@ -253,7 +256,8 @@ namespace strata::types {
       
       [[nodiscard]] constexpr STATUS MAKE_STATUS(U32 severity, U32 status_level, U32 code) noexcept {
         const U32 value = ((severity & 0x3U) << 30U) | ((status_level & 0x3FU) << 24U) | (code & 0xFFFFFFU);
-        return static_cast<STATUS>(value);
+         // so that value cannot overflow silently
+        return std::bit_cast<STATUS>(value);
       }
       
       [[nodiscard]] constexpr bool STATUS_OK(const STATUS status) noexcept { return status >= 0; }
@@ -302,6 +306,10 @@ namespace strata::types {
    using integers::PU32;
    using integers::I32;
    using integers::PI32;
+   using integers::U64;
+   using integers::PU64;
+   using integers::I64;
+   using integers::PI64;
 
    // core types
    using core::VOID;
@@ -313,6 +321,12 @@ namespace strata::types {
    // boolean types
    using boolean::BOOL;
    using boolean::PBOOL;
+   using boolean::TRUE;
+   using boolean::FALSE;
+
+   // handle types
+   using handles::HANDLE;
+   using handles::PHANDLE;
 
    // status types
    using statuses::STATUS;
