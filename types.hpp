@@ -287,6 +287,36 @@ namespace strata::types {
       inline constexpr STATUS STATUS_IO_FAILURE_ERROR = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_DRIVER, 0x000001U);
       inline constexpr STATUS STATUS_BAD_IMAGE_ERROR = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_LOADER, 0x000001U);
    }
+
+   // Selectively export certain, frequently used types so that not everything needs the fully qualified handle all of the time
+   // Integer types
+   using integers::U8;
+   using integers::PU8;
+   using integers::I8;
+   using integers::PI8;
+   using integers::U16;
+   using integers::PU16;
+   using integers::I16;
+   using integers::PI16;
+   using integers::U32;
+   using integers::PU32;
+   using integers::I32;
+   using integers::PI32;
+
+   // core types
+   using core::VOID;
+   using core::PVOID;
+   using core::NPTR;
+   using core::NNPTR;
+   using core::OPTNPTR;
+
+   // boolean types
+   using boolean::BOOL;
+   using boolean::PBOOL;
+
+   // status types
+   using statuses::STATUS;
+   using statuses::PSTATUS;
 }
 
 // Compile time architecture and ABI checks
