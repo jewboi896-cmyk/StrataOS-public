@@ -33,7 +33,7 @@ namespace strata::types {
       
       using NNPTR = NonNull<void>;
       
-      using OPTNPTR = std::optional<NonNull>;
+      using OPTNPTR = std::optional<NNPTR>;
    }
 
    namespace boolean {
@@ -171,16 +171,16 @@ namespace strata::types {
    namespace handles {
       // Generic HANDLE definition mirroring the Windows API naming conventions
       // Since generic HANDLEs are just opaque pointers, use the strongly typed handles when the type is known
-      using HANDLE = PVOID;
+      using HANDLE = core::PVOID;
       using PHANDLE = HANDLE*;
       
       // The reserved invalid generic handle representation
       // The conversion is implementation defined so its intentionally not marked as constexpr
       // representation assumes the target architecture and ABI support the chosen invalid-handle convention
-      inline HANDLE const INVALID_HANDLE = reinterpret_cast<HANDLE>(static_cast<UPTR>(~UPTR{0}));
+      inline HANDLE const INVALID_HANDLE = reinterpret_cast<HANDLE>(static_cast<pointers::UPTR>(~UPTR{0}));
       
       [[nodiscard]] inline bool IS_VALID_HANDLE(HANDLE handle) noexcept {
-        return handle != nullptr && handle  != INVALID_HANDLE;
+        return handle != nullptr && handle != INVALID_HANDLE;
       }
       
       // Declare distinct and intentionally incomplete struct type for each distinct handle category 
@@ -216,9 +216,16 @@ namespace strata::types {
       STRATA_DECLARE_HANDLE(H_INTERRUPT); // Handle to a CPU interrupt
       STRATA_DECLARE_HANDLE(H_DIRECT_MEM_ACCESS_BUFF); // Handle to a DMA buffer
       STRATA_DECLARE_HANDLE(H_TOKEN); // Handle to a security token
+
+      // undeclare to prevent macro leakage inside of other headers that could include this file (which will probably be alot of them)
+      #undef STRATA_DECLARE_HANDLE
    }
 
    namespace statuses {
+      // so i dont have to qualify everything here
+      using integers::U32;
+      using integers::I32;
+
       // Status return codes
       // Layout: 2 severity bits, 6 subsystem bits, and 24 code bits
       // The result is stored as a signed 32-bit integer
@@ -283,13 +290,13 @@ namespace strata::types {
 }
 
 // Compile time architecture and ABI checks
-static_assert(sizeof(PVOID) == 8, "64-bit target architecture required");
-static_assert(sizeof(LONG) == 8, "LONG must be 8 bytes");
-static_assert(sizeof(BOOL) == 1, "BOOL must be 1 byte");
-static_assert(sizeof(HANDLE) == 8, "HANDLE must be 8 bytes");
-static_assert(sizeof(H_FILE) == 8, "Opaque handles must be 8 bytes");
-static_assert(sizeof(STATUS) == 4, "STATUS must be 4 bytes");
-static_assert(sizeof(SIZE) == 8, "SIZE must be 8 bytes");
-static_assert(sizeof(SSIZE) == 8, "SSIZE must be 8 bytes");
-static_assert(sizeof(UPTR) == 8, "Unsigned Pointer-sized integer types must be 8 bytes");
-static_assert(sizeof(IPTR) == 8, " Signed Pointer-size integer types must be 8 bytes");
+static_assert(sizeof(strata::types::core::PVOID) == 8, "64-bit target architecture required");
+static_assert(sizeof(strata::types::longs::LONG) == 8, "LONG must be 8 bytes");
+static_assert(sizeof(strata::types::boolean::BOOL) == 1, "BOOL must be 1 byte");
+static_assert(sizeof(strata::types::handles::HANDLE) == 8, "HANDLE must be 8 bytes");
+static_assert(sizeof(strata::types::handles::H_FILE) == 8, "Opaque handles must be 8 bytes");
+static_assert(sizeof(strata::types::statuses::STATUS) == 4, "STATUS must be 4 bytes");
+static_assert(sizeof(strata::types::size::SIZE) == 8, "SIZE must be 8 bytes");
+static_assert(sizeof(strata::types::size::SSIZE) == 8, "SSIZE must be 8 bytes");
+static_assert(sizeof(strata::types::pointers::UPTR) == 8, "Unsigned Pointer-sized integer types must be 8 bytes");
+static_assert(sizeof(strata::types::pointers::IPTR) == 8, " Signed Pointer-size integer types must be 8 bytes");
