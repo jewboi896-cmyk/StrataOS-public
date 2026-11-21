@@ -8,6 +8,7 @@ mod strataOS_types {
   mod core_types {
     use core::ffi::c_void;
     use core::ptr::NonNull;
+    
     // Core and Null Definitions
     pub type VOID = ();
     pub type PVOID = *mut c_void;
@@ -16,7 +17,7 @@ mod strataOS_types {
     pub type OPTNPTR = Option<NonNull<c_void>>;
     // because of the reason above, this is a guaranteed non-null pointer
     pub type NNPTR = NonNull<c_void>;
-    // An actual null pointer
+    // A zero sized marker type for a null pointer
     #[repr(C)] pub struct NPTR;
   }
 
@@ -76,6 +77,7 @@ mod strataOS_types {
 
   mod char_types {
     use core::ffi::c_char;
+    
     // Character Definitions
     pub type CHAR = c_char;
     pub type PCHAR = *mut CHAR;
@@ -156,6 +158,8 @@ mod strataOS_types {
   pub use self::pointer_types::*;
 
   mod string_types {
+    use core::ffi::c_char;
+    
     // String Type Definitions
     // String treated as characters to preserve C ABI
     pub type STR = *mut c_char;
@@ -239,6 +243,8 @@ mod strataOS_types {
   pub use self::handle_types::*;
 
   mod status_types {
+    use super::{I32, U32};
+    
     // Status Definitions
     pub type STATUS = super::I32;
     pub type PSTATUS = *mut STATUS;
