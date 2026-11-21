@@ -4,13 +4,10 @@
 
 // General Rule: Anything that has P prefixed onto it represents a pointer, U represents the unsigned version of the type, 
 // and I or S represents the signed version of the type
-
-use core::ffi::{c_char, c_void};
-use core::ptr::NonNull;
-
-
 mod strataOS_types {
   mod core_types {
+    use core::ffi::c_void;
+    use core::ptr::NonNull;
     // Core and Null Definitions
     pub type VOID = ();
     pub type PVOID = *mut c_void;
@@ -78,6 +75,7 @@ mod strataOS_types {
   pub use self::byte_types::*;
 
   mod char_types {
+    use core::ffi::c_char;
     // Character Definitions
     pub type CHAR = c_char;
     pub type PCHAR = *mut CHAR;
@@ -170,153 +168,153 @@ mod strataOS_types {
 
   mod handle_types {
     // Generic HANDLE definitions
-    pub type HANDLE = PVOID;
+    pub type HANDLE = super::PVOID;
     pub type PHANDLE = *mut HANDLE;
+
+    // Never dereference this value
+    pub const INVALID_HANDLE: HANDLE = usize::MAX as HANDLE;
+    
+    #[must_use]
+    #[inline]
+    pub const fn IS_VALID_HANDLE(handle: HANDLE) -> bool {
+      !handle.is_null() && handle != INVALID_HANDLE
+    }
+    
+    // Distinct opaque handle wrappers. repr(transparent) preserves pointer ABI
+    macro_rules! strata_declare_handle {
+      ($name:ident, $opaque:ident, $pointer_name:ident) => {
+        #[repr(C)]
+        pub struct $opaque { _private: [u8; 0]}
+    
+        #[repr(transparent)]
+        #[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
+        pub struct $name(*mut $opaque);
+    
+        impl $name {
+          #[must-use]
+          #[inline]
+          pub const fn from_ptr(ptr: *mut $opaque) -> Self { Self(ptr) }
+    
+          #[must-use]
+          #[inline]
+          pub const fn as_ptr(self) -> *mut $opaque { self.0 }
+    
+          #[must-use]
+          #[inline]
+          pub const fn is_null(self) -> bool { self.0.is_null() }
+        }
+    
+        pub type $pointer_name  = *mut $name;
+      };
+    }
+    
+    // Order is: HANDLE_NAME, OPAQUE_NAME, POINTER_NAME
+    strata_declare_handle!(H_PROCESS, H_PROCESS__, PH_PROCESS);
+    strata_declare_handle!(H_THREAD, H_THREAD__, PH_THREAD);
+    strata_declare_handle!(H_FILE, H_FILE__, PH_FILE);
+    strata_declare_handle!(H_DIRECTORY, H_DIRECTORY__, PH_DIRECTORY);
+    strata_declare_handle!(H_DEVICE, H_DEVICE__, PH_DEVICE);
+    strata_declare_handle!(H_SOCKET, H_SOCKET__, PH_SOCKET);
+    strata_declare_handle!(H_EVENT, H_EVENT__, PH_EVENT);
+    strata_declare_handle!(H_MUTEX, H_MUTEX__, PH_MUTEX);
+    strata_declare_handle!(H_VIRT_MEM_OBJ, H_VIRT_MEM_OBJ__, PH_VIRT_MEM_OBJ);
+    strata_declare_handle!(H_MEM_SECTION, H_MEM_SECTION__, PH_MEM_SECTION);
+    strata_declare_handle!(H_VIRT_ADD_SPACE, H_VIRT_ADD_SPACE__, PH_VIRT_ADD_SPACE);
+    strata_declare_handle!(H_DRIVER_MOD, H_DRIVER_MOD__, PH_DRIVER_MOD);
+    strata_declare_handle!(H_LIBRARY_MOD, H_LIBRARY_MOD__, PH_LIBRARY_MOD);
+    strata_declare_handle!(H_SEMAPHORE, H_SEMAPHORE__, PH_SEMAPHORE);
+    strata_declare_handle!(H_READ_WRITE_LOCK, H_READ_WRITE_LOCK__, PH_READ_WRITE_LOCK);
+    strata_declare_handle!(H_TIMER, H_TIMER__, PH_TIMER);
+    strata_declare_handle!(H_PIPE, H_PIPE__, PH_PIPE);
+    strata_declare_handle!(H_CHANNEL, H_CHANNEL__, PH_CHANNEL);
+    strata_declare_handle!(H_PORT, H_PORT__, PH_PORT);
+    strata_declare_handle!(H_IO_COMPLETION_PORT, H_IO_COMPLETION_PORT__, PH_IO_COMPLETION_PORT);
+    strata_declare_handle!(H_EVENT_QUEUE, H_EVENT_QUEUE__, PH_EVENT_QUEUE);
+    strata_declare_handle!(H_JOB, H_JOB__, PH_JOB);
+    strata_declare_handle!(H_INTERRUPT, H_INTERRUPT__, PH_INTERRUPT);
+    strata_declare_handle!(H_DIRECT_MEM_ACCESS_BUFF, H_DIRECT_MEM_ACCESS_BUFF__, PH_DIRECT_MEM_ACCESS_BUFF);
+    strata_declare_handle!(H_TOKEN, H_TOKEN__, PH_TOKEN);
   }
 
   pub use self::handle_types::*;
 
   mod status_types {
     // Status Definitions
-    pub type STATUS = I32;
+    pub type STATUS = super::I32;
     pub type PSTATUS = *mut STATUS;
+
+    // Status return codes
+    // Layout: 2 severity bits, 6 subsystem bits, and 24 code bits
+    // The result is stored as a signed 32-bit integer
+    pub const STRATA_SEVERITY_SUCCESS: U32 = 0x0;
+    pub const STRATA_SEVERITY_INFO: U32 = 0x1;
+    pub const STRATA_SEVERITY_WARNING: U32 = 0x2;
+    pub const STRATA_SEVERITY_ERROR: U32 = 0x3;
+    
+    // The strata where the status occured in
+    pub const STRATA_CORE: U32 = 0x00;
+    pub const STRATA_MMU: U32 = 0x01;
+    pub const STRATA_SCHED: U32 = 0x02;
+    pub const STRATA_IPC: U32 = 0x03;
+    pub const STRATA_FILESYS: U32 = 0x04;
+    pub const STRATA_DRIVER: U32 = 0x05;
+    pub const STRATA_NETWORK: U32 = 0x06;
+    pub const STRATA_SYSTEM: U32 = 0x07;
+    pub const STRATA_SECURITY: U32 = 0x08;
+    pub const STRATA_LOADER: U32 = 0x09; // For modules and library related things
+    pub const STRATA_INTERRUPT: U32 = 0x0A;
+    pub const STRATA_TIMER: U32 = 0x0B;
+    pub const STRATA_IO: U32 = 0x0C;
+    
+    // Makes a MAKE_STATUS
+    #[must_use]
+    #[inline]
+    pub const fn MAKE_STATUS(severity: U32, status_level: U32, status_code: U32) -> STATUS {
+      let bits = ((severity & 0x3) << 30) | ((status_level & 0x3F) << 24) | (status_code & 0x00FF_FFFF); 
+      bits as STATUS
+    }
+    
+    #[must_use]
+    #[inline]
+    pub const fn STATUS_OK(status: STATUS) -> bool { status >= 0 }
+    
+    #[must_use]
+    #[inline]
+    pub const fn STATUS_FAILED(status: STATUS) -> bool { status < 0 }
+    
+    #[must_use]
+    #[inline]
+    pub const fn STATUS_SEVERITY(status: STATUS) -> U32 { ((status as U32) >> 30) & 0x3 }
+    
+    #[must_use]
+    #[inline]
+    pub const fn STATUS_STRATA(status: STATUS) -> U32 { ((status as U32) >> 24) & 0x3F }
+    
+    #[must_use]
+    #[inline]
+    pub const fn STATUS_CODE(status: STATUS) -> U32 { (status as U32) & 0x00FF_FFFF}
+    
+    // All error states as they currently are
+    pub const STATUS_SUCCESS: STATUS = MAKE_STATUS(STRATA_SEVERITY_SUCCESS, STRATA_CORE, 0x000000);
+    pub const STATUS_PENDING: STATUS = MAKE_STATUS(STRATA_SEVERITY_INFO, STRATA_CORE, 0x000001);
+    pub const STATUS_GENERIC_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_CORE, 0x000001);
+    pub const STATUS_INVALID_PARAMETER_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_CORE, 0x000002);
+    pub const STATUS_OUT_OF_MEMORY_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_MMU, 0x000001);
+    pub const STATUS_ACCESS_DENIED_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_CORE, 0x000003);
+    pub const STATUS_NOT_FOUND_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_CORE, 0x000004);
+    pub const STATUS_ALREADY_EXISTS_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_CORE, 0x000005);
+    pub const STATUS_INVALID_HANDLE_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_CORE, 0x000006);
+    pub const STATUS_NOT_IMPLEMENTED_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_SYSTEM, 0x000001);
+    pub const STATUS_TIMEOUT_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_SCHED, 0x000001);
+    pub const STATUS_BUFFER_TOO_SMALL_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_CORE, 0x000007);
+    pub const STATUS_IO_FAILURE_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_DRIVER, 0x000001);
+    pub const STATUS_BAD_IMAGE_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_LOADER, 0x000001);
   }
 
   pub use self::status_types::*;
 }
 
 pub use self::strataOS_types::*;
-
-// Never dereference this value
-pub const INVALID_HANDLE: HANDLE = usize::MAX as HANDLE;
-
-#[must_use]
-#[inline]
-pub const fn IS_VALID_HANDLE(handle: HANDLE) -> bool {
-  !handle.is_null() && handle != INVALID_HANDLE
-}
-
-// Distinct opaque handle wrappers. repr(transparent) preserves pointer ABI
-macro_rules! strata_declare_handle {
-  ($name:ident, $opaque:ident, $pointer_name:ident) => {
-    #[repr(C)]
-    pub struct $opaque { _private: [u8; 0]}
-
-    #[repr(transparent)]
-    #[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
-    pub struct $name(*mut $opaque);
-
-    impl $name {
-      #[must-use]
-      #[inline]
-      pub const fn from_ptr(ptr: *mut $opaque) -> Self { Self(ptr) }
-
-      #[must-use]
-      #[inline]
-      pub const fn as_ptr(self) -> *mut $opaque { self.0 }
-
-      #[must-use]
-      #[inline]
-      pub const fn is_null(self) -> bool { self.0.is_null() }
-    }
-
-    pub type $pointer_name  = *mut $name;
-  };
-}
-
-// Order is: HANDLE_NAME, OPAQUE_NAME, POINTER_NAME
-strata_declare_handle!(H_PROCESS, H_PROCESS__, PH_PROCESS);
-strata_declare_handle!(H_THREAD, H_THREAD__, PH_THREAD);
-strata_declare_handle!(H_FILE, H_FILE__, PH_FILE);
-strata_declare_handle!(H_DIRECTORY, H_DIRECTORY__, PH_DIRECTORY);
-strata_declare_handle!(H_DEVICE, H_DEVICE__, PH_DEVICE);
-strata_declare_handle!(H_SOCKET, H_SOCKET__, PH_SOCKET);
-strata_declare_handle!(H_EVENT, H_EVENT__, PH_EVENT);
-strata_declare_handle!(H_MUTEX, H_MUTEX__, PH_MUTEX);
-strata_declare_handle!(H_VIRT_MEM_OBJ, H_VIRT_MEM_OBJ__, PH_VIRT_MEM_OBJ);
-strata_declare_handle!(H_MEM_SECTION, H_MEM_SECTION__, PH_MEM_SECTION);
-strata_declare_handle!(H_VIRT_ADD_SPACE, H_VIRT_ADD_SPACE__, PH_VIRT_ADD_SPACE);
-strata_declare_handle!(H_DRIVER_MOD, H_DRIVER_MOD__, PH_DRIVER_MOD);
-strata_declare_handle!(H_LIBRARY_MOD, H_LIBRARY_MOD__, PH_LIBRARY_MOD);
-strata_declare_handle!(H_SEMAPHORE, H_SEMAPHORE__, PH_SEMAPHORE);
-strata_declare_handle!(H_READ_WRITE_LOCK, H_READ_WRITE_LOCK__, PH_READ_WRITE_LOCK);
-strata_declare_handle!(H_TIMER, H_TIMER__, PH_TIMER);
-strata_declare_handle!(H_PIPE, H_PIPE__, PH_PIPE);
-strata_declare_handle!(H_CHANNEL, H_CHANNEL__, PH_CHANNEL);
-strata_declare_handle!(H_PORT, H_PORT__, PH_PORT);
-strata_declare_handle!(H_IO_COMPLETION_PORT, H_IO_COMPLETION_PORT__, PH_IO_COMPLETION_PORT);
-strata_declare_handle!(H_EVENT_QUEUE, H_EVENT_QUEUE__, PH_EVENT_QUEUE);
-strata_declare_handle!(H_JOB, H_JOB__, PH_JOB);
-strata_declare_handle!(H_INTERRUPT, H_INTERRUPT__, PH_INTERRUPT);
-strata_declare_handle!(H_DIRECT_MEM_ACCESS_BUFF, H_DIRECT_MEM_ACCESS_BUFF__, PH_DIRECT_MEM_ACCESS_BUFF);
-strata_declare_handle!(H_TOKEN, H_TOKEN__, PH_TOKEN);
-
-// Status return codes
-// Layout: 2 severity bits, 6 subsystem bits, and 24 code bits
-// The result is stored as a signed 32-bit integer
-pub const STRATA_SEVERITY_SUCCESS: U32 = 0x0;
-pub const STRATA_SEVERITY_INFO: U32 = 0x1;
-pub const STRATA_SEVERITY_WARNING: U32 = 0x2;
-pub const STRATA_SEVERITY_ERROR: U32 = 0x3;
-
-// The strata where the status occured in
-pub const STRATA_CORE: U32 = 0x00;
-pub const STRATA_MMU: U32 = 0x01;
-pub const STRATA_SCHED: U32 = 0x02;
-pub const STRATA_IPC: U32 = 0x03;
-pub const STRATA_FILESYS: U32 = 0x04;
-pub const STRATA_DRIVER: U32 = 0x05;
-pub const STRATA_NETWORK: U32 = 0x06;
-pub const STRATA_SYSTEM: U32 = 0x07;
-pub const STRATA_SECURITY: U32 = 0x08;
-pub const STRATA_LOADER: U32 = 0x09; // For modules and library related things
-pub const STRATA_INTERRUPT: U32 = 0x0A;
-pub const STRATA_TIMER: U32 = 0x0B;
-pub const STRATA_IO: U32 = 0x0C;
-
-// Makes a MAKE_STATUS
-#[must_use]
-#[inline]
-pub const fn MAKE_STATUS(severity: U32, status_level: U32, status_code: U32) -> STATUS {
-  let bits = ((severity & 0x3) << 30) | ((status_level & 0x3F) << 24) | (status_code & 0x00FF_FFFF); 
-  bits as STATUS
-}
-
-#[must_use]
-#[inline]
-pub const fn STATUS_OK(status: STATUS) -> bool { status >= 0 }
-
-#[must_use]
-#[inline]
-pub const fn STATUS_FAILED(status: STATUS) -> bool { status < 0 }
-
-#[must_use]
-#[inline]
-pub const fn STATUS_SEVERITY(status: STATUS) -> U32 { ((status as U32) >> 30) & 0x3 }
-
-#[must_use]
-#[inline]
-pub const fn STATUS_STRATA(status: STATUS) -> U32 { ((status as U32) >> 24) & 0x3F }
-
-#[must_use]
-#[inline]
-pub const fn STATUS_CODE(status: STATUS) -> U32 { (status as U32) & 0x00FF_FFFF}
-
-// All error states as they currently are
-pub const STATUS_SUCCESS: STATUS = MAKE_STATUS(STRATA_SEVERITY_SUCCESS, STRATA_CORE, 0x000000);
-pub const STATUS_PENDING: STATUS = MAKE_STATUS(STRATA_SEVERITY_INFO, STRATA_CORE, 0x000001);
-pub const STATUS_GENERIC_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_CORE, 0x000001);
-pub const STATUS_INVALID_PARAMETER_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_CORE, 0x000002);
-pub const STATUS_OUT_OF_MEMORY_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_MMU, 0x000001);
-pub const STATUS_ACCESS_DENIED_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_CORE, 0x000003);
-pub const STATUS_NOT_FOUND_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_CORE, 0x000004);
-pub const STATUS_ALREADY_EXISTS_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_CORE, 0x000005);
-pub const STATUS_INVALID_HANDLE_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_CORE, 0x000006);
-pub const STATUS_NOT_IMPLEMENTED_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_SYSTEM, 0x000001);
-pub const STATUS_TIMEOUT_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_SCHED, 0x000001);
-pub const STATUS_BUFFER_TOO_SMALL_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_CORE, 0x000007);
-pub const STATUS_IO_FAILURE_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_DRIVER, 0x000001);
-pub const STATUS_BAD_IMAGE_ERROR: STATUS = MAKE_STATUS(STRATA_SEVERITY_ERROR, STRATA_LOADER, 0x000001);
 
 // Compile time architecture checks
 const _: () = {
