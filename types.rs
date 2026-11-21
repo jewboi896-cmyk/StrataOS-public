@@ -8,125 +8,185 @@
 use core::ffi::{c_char, c_void};
 use core::ptr::NonNull;
 
-// Core and Null Definitions
-pub type VOID = ();
-pub type PVOID = *mut c_void;
-// Rust has no direct nullptr_t equivalent so at this time, this isnt intended to by C ABI compatible as this is 
-//Optional, guaranteed-non-null pointer when present
-pub type OPTNPTR = Option<NonNull<c_void>>;
-// because of the reason above, this is a guaranteed non-null pointer
-pub type NNPTR = NonNull<c_void>;
-// An actual null pointer
-#[repr(C)] pub struct NPTR;
 
-// Boolean Type Definitions
-pub type BOOL = u8;
-pub type PBOOL = *mut BOOL;
-pub const TRUE: BOOL = 1;
-pub const FALSE: BOOL = 0;
+mod strataOS_types {
+  mod core_types {
+    // Core and Null Definitions
+    pub type VOID = ();
+    pub type PVOID = *mut c_void;
+    // Rust has no direct nullptr_t equivalent so at this time, this isnt intended to by C ABI compatible as this is 
+    //Optional, guaranteed-non-null pointer when present
+    pub type OPTNPTR = Option<NonNull<c_void>>;
+    // because of the reason above, this is a guaranteed non-null pointer
+    pub type NNPTR = NonNull<c_void>;
+    // An actual null pointer
+    #[repr(C)] pub struct NPTR;
+  }
 
-// 8-bit Integer Definitions
-pub type U8 = u8;
-pub type PU8 = *mut U8;
-pub type I8 = i8;
-pub type PI8 = *mut I8;
+  // Expose them
+  pub use self::core_types::*;
 
-// 16-bit Integer Definitions
-pub type U16 = u16;
-pub type PU16 = *mut U16;
-pub type I16 = i16;
-pub type PI16 = *mut I16;
+  mod boolean_types {
+    // Boolean Type Definitions
+    pub type BOOL = u8;
+    pub type PBOOL = *mut BOOL;
+    pub const TRUE: BOOL = 1;
+    pub const FALSE: BOOL = 0;
+  }
 
-// 32-bir Integer Definitions
-pub type U32 = u32;
-pub type PU32 = *mut U32;
-pub type I32 = i32;
-pub type PI32 = *mut I32;
+  // Expose them 
+  pub use self::boolean_types::*;
 
-// 64-bit Integer Definitions
-pub type U64 = u64;
-pub type PU64 = *mut U64;
-pub type I64 = i64;
-pub type PI64 = *mut I64;
+  mod integer_types {
+    // 8-bit Integer Definitions
+    pub type U8 = u8;
+    pub type PU8 = *mut U8;
+    pub type I8 = i8;
+    pub type PI8 = *mut I8;
+    
+    // 16-bit Integer Definitions
+    pub type U16 = u16;
+    pub type PU16 = *mut U16;
+    pub type I16 = i16;
+    pub type PI16 = *mut I16;
+    
+    // 32-bir Integer Definitions
+    pub type U32 = u32;
+    pub type PU32 = *mut U32;
+    pub type I32 = i32;
+    pub type PI32 = *mut I32;
+    
+    // 64-bit Integer Definitions
+    pub type U64 = u64;
+    pub type PU64 = *mut U64;
+    pub type I64 = i64;
+    pub type PI64 = *mut I64;
+  }
 
-// Byte Definitions
-pub type BYTE = u8;
-pub type PBYTE = *mut BYTE;
-pub type UBYTE = u8;
-pub type PUBYTE = *mut UBYTE;
-pub type SBYTE = i8;
-pub type PSBYTE = *mut SBYTE;
+  pub use self::integer_types::*;
 
-// Character Definitions
-pub type CHAR = c_char;
-pub type PCHAR = *mut CHAR;
-pub type SCHAR = i8;
-pub type PSCHAR = *mut SCHAR;
-pub type UCHAR = u8;
-pub type PUCHAR = *mut UCHAR;
+  mod byte_types {
+    // Byte Definitions
+    pub type BYTE = u8;
+    pub type PBYTE = *mut BYTE;
+    pub type UBYTE = u8;
+    pub type PUBYTE = *mut UBYTE;
+    pub type SBYTE = i8;
+    pub type PSBYTE = *mut SBYTE;
+  }
 
-// Short Definitions
-pub type SHORT = i16;
-pub type PSHORT = *mut SHORT;
-pub type SSHORT = i16;
-pub type PSSHORT = *mut SSHORT;
-pub type USHORT = u16;
-pub type PUSHORT = *mut USHORT;
+  pub use self::byte_types::*;
 
-// Long definitions
-pub type LONG = i64;
-pub type PLONG = *mut LONG;
-pub type SLONG = i64;
-pub type PSLONG = *mut SLONG;
-pub type ULONG = u64;
-pub type PULONG = *mut ULONG;
-pub type LLONG = i64;
-pub type PLLONG = *mut LLONG;
-pub type SLLONG = i64;
-pub type PSLLONG = *mut SLLONG;
-pub type ULLONG = u64;
-pub type PULLONG = *mut ULLONG;
+  mod char_types {
+    // Character Definitions
+    pub type CHAR = c_char;
+    pub type PCHAR = *mut CHAR;
+    pub type SCHAR = i8;
+    pub type PSCHAR = *mut SCHAR;
+    pub type UCHAR = u8;
+    pub type PUCHAR = *mut UCHAR;
+  }
 
-// Enable the Cargo feature to omit floating point alias types in the core kernel sections
-// They can use FPU/SSE/AVX registers, which are not necessarily saved during a context switch
-#[cfg(not(feature = "strata-kernel-core-types"))]
-mod floating_point_types {
-  pub type FLOAT = f32;
-  pub type PFLOAT = *mut FLOAT;
-  pub type DOUBLE = f64;
-  pub type PDOUBLE = *mut DOUBLE;
+  pub use self::char_types::*;
 
-  // Rust has no portable primitive equivalent to C++ `long double`.
-  // f64 is used as an explicit approximation; it may have less precision
-  pub type LDOUBLE = f64;
-  pub type PLDOUBLE = *mut LDOUBLE;
+  mod short_types {
+    // Short Definitions
+    pub type SHORT = i16;
+    pub type PSHORT = *mut SHORT;
+    pub type SSHORT = i16;
+    pub type PSSHORT = *mut SSHORT;
+    pub type USHORT = u16;
+    pub type PUSHORT = *mut USHORT;
+  }
+
+  pub use self::short_types::*;
+
+  mod long_types {
+    // Long definitions
+    pub type LONG = i64;
+    pub type PLONG = *mut LONG;
+    pub type SLONG = i64;
+    pub type PSLONG = *mut SLONG;
+    pub type ULONG = u64;
+    pub type PULONG = *mut ULONG;
+    pub type LLONG = i64;
+    pub type PLLONG = *mut LLONG;
+    pub type SLLONG = i64;
+    pub type PSLLONG = *mut SLLONG;
+    pub type ULLONG = u64;
+    pub type PULLONG = *mut ULLONG;
+  }
+
+  pub use self::long_types::*;
+
+  // Enable the Cargo feature to omit floating point alias types in the core kernel sections
+  // They can use FPU/SSE/AVX registers, which are not necessarily saved during a context switch
+  #[cfg(not(feature = "strata-kernel-core-types"))]
+  mod floating_point_types {
+    pub type FLOAT = f32;
+    pub type PFLOAT = *mut FLOAT;
+    pub type DOUBLE = f64;
+    pub type PDOUBLE = *mut DOUBLE;
+  
+    // Rust has no portable primitive equivalent to C++ `long double`.
+    // f64 is used as an explicit approximation; it may have less precision
+    pub type LDOUBLE = f64;
+    pub type PLDOUBLE = *mut LDOUBLE;
+  }
+  
+  #[cfg(not(feature = "strata-kernel-core-types"))]
+  pub use self::floating_point_types::*;
+
+  mod size_types {
+    // Size Type Definitions
+    pub type SIZE = u64;
+    pub type PSIZE = *mut SIZE;
+    pub type SSIZE = i64;
+    pub type PSSIZE = *mut SSIZE;
+  }
+
+  pub use self::size_types::*;
+
+  mod pointer_types {
+    // Pointer Type Definitions
+    pub type UPTR = usize;
+    pub type PUPTR = *mut UPTR;
+    pub type IPTR = isize;
+    pub type PIPTR = *mut IPTR;
+  }
+
+  pub use self::pointer_types::*;
+
+  mod string_types {
+    // String Type Definitions
+    // String treated as characters to preserve C ABI
+    pub type STR = *mut c_char;
+    pub type PSTR = *mut STR;
+    pub type CSTR = *const c_char;
+    pub type PCSTR = *mut CSTR;
+  }
+
+  pub use self::string_types::*;
+
+  mod handle_types {
+    // Generic HANDLE definitions
+    pub type HANDLE = PVOID;
+    pub type PHANDLE = *mut HANDLE;
+  }
+
+  pub use self::handle_types::*;
+
+  mod status_types {
+    // Status Definitions
+    pub type STATUS = I32;
+    pub type PSTATUS = *mut STATUS;
+  }
+
+  pub use self::status_types::*;
 }
 
-#[cfg(not(feature = "strata-kernel-core-types"))]
-pub use floating_point_types::*;
+pub use self::strataOS_types::*;
 
-// Size Type Definitions
-pub type SIZE = u64;
-pub type PSIZE = *mut SIZE;
-pub type SSIZE = i64;
-pub type PSSIZE = *mut SSIZE;
-
-// Pointer Type Definitions
-pub type UPTR = usize;
-pub type PUPTR = *mut UPTR;
-pub type IPTR = isize;
-pub type PIPTR = *mut IPTR;
-
-// String Type Definitions
-// String treated as characters to preserve C ABI
-pub type STR = *mut c_char;
-pub type PSTR = *mut STR;
-pub type CSTR = *const c_char;
-pub type PCSTR = *mut CSTR;
-
-// Generic HANDLE definitions
-pub type HANDLE = PVOID;
-pub type PHANDLE = *mut HANDLE;
 // Never dereference this value
 pub const INVALID_HANDLE: HANDLE = usize::MAX as HANDLE;
 
@@ -190,10 +250,6 @@ strata_declare_handle!(H_JOB, H_JOB__, PH_JOB);
 strata_declare_handle!(H_INTERRUPT, H_INTERRUPT__, PH_INTERRUPT);
 strata_declare_handle!(H_DIRECT_MEM_ACCESS_BUFF, H_DIRECT_MEM_ACCESS_BUFF__, PH_DIRECT_MEM_ACCESS_BUFF);
 strata_declare_handle!(H_TOKEN, H_TOKEN__, PH_TOKEN);
-
-// Status Definitions
-pub type STATUS = I32;
-pub type PSTATUS = *mut STATUS;
 
 // Status return codes
 // Layout: 2 severity bits, 6 subsystem bits, and 24 code bits
