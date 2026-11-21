@@ -1,6 +1,3 @@
-#ifndef STRATA_TYPES_C_H
-#define STRATA_TYPES_C_H
-
 #pragma once
 
 // General Rule: Anything that has P prefixed onto it represents a pointer, U represents the unsigned version of the type, 
@@ -214,5 +211,3 @@ static_assert(sizeof(BOOL) == 1, "BOOL must be 1 byte on a 64 bit target archite
 static_assert(sizeof(HANDLE) == 8, "HANDLE must be 8 bytes");
 static_assert(sizeof(H_FILE) == 8, "Opaque handle must be 8 bytes");
 static_assert(sizeof(STATUS) == 4, "STATUS must be 4 bytes");
-
-#endif
