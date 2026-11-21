@@ -28,7 +28,7 @@ namespace strata::types {
          T* ptr;
       public:
          explicit NonNull(T* ptr) : ptr(ptr) { assert(ptr != nullptr); }
-         [[nodiscard]] T* getNonNullPtr() const noexcept { return ptr; } 
+         [[nodiscard]] T* getPtr() const noexcept { return ptr; } 
       };
       
       using NNPTR = NonNull<void>;
