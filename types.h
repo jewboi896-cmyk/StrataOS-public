@@ -107,10 +107,14 @@ typedef intptr_t* PIPTR;
 // C String aliases because C dosent have a built in String class like C++ or Java.
 // C treats Strings as arrays of characters so that is what i will do
 // This also makes the FFI easier between C and the other languages in this OS
-typedef char* STR;
-typedef char** PSTR;
-typedef const char* CSTR;
-typedef const char** PCSTR;
+typedef char* NSTR; // narrow
+typedef char** PNSTR;
+typedef const char* CNSTR; // const narrow
+typedef const char** PCNSTR;
+typedef char16_t* WSTR; // wide
+typedef char16_t** PWSTR;
+typedef const char16_t* CWSTR; // const wide
+typedef const char16_t** PCWSTR;
 
 // HANDLE definition. Im borrowing from the Windows API that uses opaque pointers to files as a void pointer named HANDLE
 typedef PVOID HANDLE;
