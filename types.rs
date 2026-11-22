@@ -48,7 +48,7 @@ mod strataOS_types {
     pub type I16 = i16;
     pub type PI16 = *mut I16;
     
-    // 32-bir Integer Definitions
+    // 32-bit Integer Definitions
     pub type U32 = u32;
     pub type PU32 = *mut U32;
     pub type I32 = i32;
