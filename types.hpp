@@ -30,8 +30,8 @@ namespace strata::types {
       private:
          T* ptr;
       public:
-         explicit NonNull(T* ptr) noexcept : pointer(ptr) { assert(ptr != nullptr); }
-         [[nodiscard]] T* getPtr() const noexcept { return pointer; } 
+         explicit NonNull(T* ptr) noexcept : ptr(pointer) { assert(pointer != nullptr); }
+         [[nodiscard]] T* getPtr() const noexcept { return ptr; } 
       };
       
       using NNPTR = NonNull<void>;
@@ -164,16 +164,24 @@ namespace strata::types {
    namespace strings {
       // String aliases
       // Represented as character pointers to preserve C ABI compatibility and the other languages used
-      using NSTR = char*; // narrow
-      using PNSTR = STR*;
 
-      using WSTR = char16_t; // wide
-      using PWSTR = WSTR*;
-      using CWSTR = const char16_t; // const wide
-      using PCWSTR = const char16_t*;
-      
-      using CNSTR = const char*; // const narrow
+      // Narrow strings
+      using NSTR = char*;
+      using PNSTR = NSTR*;
+
+      using CNSTR = const char*;
       using PCNSTR = CNSTR*;
+
+      // UTF-8 specific type defs
+      using U8STR = char8_t*;
+      using PU8STR = U8STR*;
+
+      // Wide strings (UTF-16)
+      using WSTR = char16_t*;
+      using PWSTR = WSTR*;
+
+      using CWSTR = const char16_t*;
+      using PCWSTR = CWSTR*;
    }
 
    namespace handles {
@@ -261,7 +269,7 @@ namespace strata::types {
       
       [[nodiscard]] constexpr STATUS MAKE_STATUS(U32 severity, U32 status_level, U32 code) noexcept {
         const U32 value = ((severity & 0x3U) << 30U) | ((status_level & 0x3FU) << 24U) | (code & 0xFFFFFFU);
-         // so that value cannot overflow silently
+         // so that value representation is preserved when interpretted as signed
         return std::bit_cast<STATUS>(value);
       }
       
