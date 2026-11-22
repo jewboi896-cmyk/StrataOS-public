@@ -30,7 +30,7 @@ namespace strata::types {
       private:
          T* ptr;
       public:
-         explicit NonNull(T* ptr) noexcept : ptr(pointer) { assert(pointer != nullptr); }
+         explicit NonNull(T* pointer) noexcept : ptr(pointer) { assert(pointer != nullptr); }
          [[nodiscard]] T* getPtr() const noexcept { return ptr; } 
       };
       
@@ -175,6 +175,9 @@ namespace strata::types {
       // UTF-8 specific type defs
       using U8STR = char8_t*;
       using PU8STR = U8STR*;
+
+      using CU8STR = const char8_t*;
+      using PCU8STR = CU8STR*;
 
       // Wide strings (UTF-16)
       using WSTR = char16_t*;
