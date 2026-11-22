@@ -164,11 +164,16 @@ namespace strata::types {
    namespace strings {
       // String aliases
       // Represented as character pointers to preserve C ABI compatibility and the other languages used
-      using STR = char*;
-      using PSTR = STR*;
+      using NSTR = char*; // narrow
+      using PNSTR = STR*;
+
+      using WSTR = char16_t; // wide
+      using PWSTR = WSTR*;
+      using CWSTR = const char16_t; // const wide
+      using PCWSTR = const char16_t*;
       
-      using CSTR = const char*;
-      using PCSTR = CSTR*;
+      using CNSTR = const char*; // const narrow
+      using PCNSTR = CNSTR*;
    }
 
    namespace handles {
