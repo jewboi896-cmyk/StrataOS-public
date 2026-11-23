@@ -326,14 +326,14 @@ pub use self::strataOS_types::*;
 
 // Compile time architecture checks
 const _: () = {
-  assert!(core::mem::size_of::<PVOID>() == 8, "64-bit target architecture required");
-  assert!(core::mem::size_of::<LONG>() == 8, "LONG must be 8 bytes");
-  assert!(core::mem::size_of::<BOOL>() == 1, "BOOL must be 1 byte");
-  assert!(core::mem::size_of::<HANDLE>() == 8, "HANDLE must be 8 bytes");
-  assert!(core::mem::size_of::<H_FILE>() == 8, "Opaque handles must be 8 bytes");
-  assert!(core::mem::size_of::<STATUS>() == 4, "STATUS must be 4 bytes");
-  assert!(core::mem::size_of::<SIZE>() == 8, "SIZE must be 8 bytes");
-  assert!(core::mem::size_of::<SSIZE>() == 8, "SSIZE must be 8 bytes");
-  assert!(core::mem::size_of::<UPTR>() == 8, "UPTR must be 8 bytes");
-  assert!(core::mem::size_of::<IPTR>() == 8, "IPTR must be 8 bytes");
+  assert!(size_of::<PVOID>() == 8, "64-bit target architecture required");
+  assert!(size_of::<LONG>() == 8, "LONG must be 8 bytes");
+  assert!(size_of::<BOOL>() == 1, "BOOL must be 1 byte");
+  assert!(size_of::<HANDLE>() == 8, "HANDLE must be 8 bytes");
+  assert!(size_of::<H_FILE>() == 8, "Opaque handles must be 8 bytes");
+  assert!(size_of::<STATUS>() == 4, "STATUS must be 4 bytes");
+  assert!(size_of::<SIZE>() == 8, "SIZE must be 8 bytes");
+  assert!(size_of::<SSIZE>() == 8, "SSIZE must be 8 bytes");
+  assert!(size_of::<UPTR>() == 8, "UPTR must be 8 bytes");
+  assert!(size_of::<IPTR>() == 8, "IPTR must be 8 bytes");
 };
