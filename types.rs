@@ -246,7 +246,7 @@ mod strataOS_types {
     use super::{I32, U32};
     
     // Status Definitions
-    pub type STATUS = super::I32;
+    pub type STATUS = I32;
     pub type PSTATUS = *mut STATUS;
 
     // Status return codes
@@ -257,7 +257,7 @@ mod strataOS_types {
     pub const STRATA_SEVERITY_WARNING: U32 = 0x2;
     pub const STRATA_SEVERITY_ERROR: U32 = 0x3;
     
-    // The strata where the status occured in
+    // The strata where the status occurred in
     pub const STRATA_CORE: U32 = 0x00;
     pub const STRATA_MMU: U32 = 0x01;
     pub const STRATA_SCHED: U32 = 0x02;
