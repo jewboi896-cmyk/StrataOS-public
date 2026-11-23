@@ -278,7 +278,7 @@ mod strataOS_types {
     #[must_use]
     #[inline]
     pub const fn MAKE_STATUS(severity: U32, status_level: U32, status_code: U32) -> STATUS {
-      let bits = ((severity & 0x3) << 30) | ((status_level & 0x3F) << 24) | (status_code & 0x00FF_FFFF); 
+      let bits: U32 = ((severity & 0x3) << 30) | ((status_level & 0x3F) << 24) | (status_code & 0x00FF_FFFF);
       bits as STATUS
     }
     
