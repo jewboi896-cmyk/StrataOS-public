@@ -1,3 +1,4 @@
 /target/
 /.idea/
+# Claude helps with documentation writing and organization so ignore those files for this repo
 /claude-docs/
