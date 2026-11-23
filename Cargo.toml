@@ -1,0 +1,23 @@
+[package]
+name = "strata-os-types"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.100.0"
+description = "Core type definitions for StrataOS (Rust port of types.h / types.hpp)"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[lib]
+name = "strata_os_types"
+path = "types.rs"
+
+[features]
+default = []
+# Omits the floating point alias types (FLOAT, DOUBLE, LDOUBLE) for kernel core
+# code, where FPU/SSE/AVX state is not necessarily saved on context switch.
+strata-kernel-core-types = []
+
+[dependencies]
+
+[lints.rust]
+unsafe_op_in_unsafe_fn = "warn"

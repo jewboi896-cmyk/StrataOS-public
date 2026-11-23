@@ -1,6 +1,8 @@
 // Rust implementation of types.h and types.hpp
 #![allow(non_camel_case_types)]
-#![allow(non-snake-case)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+#![no_std]
 
 // General Rule: Anything that has P prefixed onto it represents a pointer, U represents the unsigned version of the type, 
 // and I or S represents the signed version of the type
@@ -180,7 +182,7 @@ mod strataOS_types {
     
     #[must_use]
     #[inline]
-    pub const fn IS_VALID_HANDLE(handle: HANDLE) -> bool {
+    pub fn IS_VALID_HANDLE(handle: HANDLE) -> bool {
       !handle.is_null() && handle != INVALID_HANDLE
     }
     
@@ -195,15 +197,15 @@ mod strataOS_types {
         pub struct $name(*mut $opaque);
     
         impl $name {
-          #[must-use]
+          #[must_use]
           #[inline]
           pub const fn from_ptr(ptr: *mut $opaque) -> Self { Self(ptr) }
     
-          #[must-use]
+          #[must_use]
           #[inline]
           pub const fn as_ptr(self) -> *mut $opaque { self.0 }
     
-          #[must-use]
+          #[must_use]
           #[inline]
           pub const fn is_null(self) -> bool { self.0.is_null() }
         }
