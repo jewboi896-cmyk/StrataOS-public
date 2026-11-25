@@ -10,7 +10,6 @@
 typedef void VOID;
 typedef void* PVOID;
 
-#define NULL nullptr
 typedef typeof(nullptr) NPTR;
 // A typedef for a non-null pointer, C doesnt have a built in type so actual enforcement needs to come through methods and runtime checks
 typedef void* NNPTR;
@@ -123,7 +122,7 @@ typedef HANDLE* PHANDLE;
 #define INVALID_HANDLE ((HANDLE)(IPTR) - 1)
 static inline BOOL IS_VALID_HANDLE(const HANDLE handle) { return handle != NPTR && handle != INVALID_HANDLE; }
 
-#define STRATA_DECLARE_HANDLE(name) typedef struct name##__ { int unused; } *name, **P##name
+#define STRATA_DECLARE_HANDLE(name) typedef struct name##__ *name, **P##name
 
 // Define each handle
 STRATA_DECLARE_HANDLE(H_PROCESS); // Handle to a process
@@ -162,23 +161,23 @@ typedef I32* PSTATUS;
 // Status return codes
 // Layout: 2 severity bits, 6 subsystem bits, and 24 code bits
 // The result is stored as a signed 32-bit integer
-#define STRATA_SEVERITY_SUCCESS 0x0U
-#define STRATA_SEVERITY_INFO 0x1U
-#define STRATA_SEVERITY_WARNING 0x2U
-#define STRATA_SEVERITY_ERROR 0x3U
-#define STRATA_CORE 0x00U
-#define STRATA_MMU 0x01U
-#define STRATA_SCHED 0x02U
-#define STRATA_IPC 0x03U
-#define STRATA_FILESYS 0x04U
-#define STRATA_DRIVER 0x05U
-#define STRATA_NETWORK 0x06U
-#define STRATA_SYSTEM 0x07U
-#define STRATA_SECURITY 0x08U
-#define STRATA_LOADER 0x09U /* lib and driver modules */
-#define STRATA_INTERRUPT 0x0AU
-#define STRATA_TIMER 0x0BU
-#define STRATA_IO 0x0CU
+#define STATUS_SEVERITY_SUCCESS 0x0U
+#define STATUS_SEVERITY_INFO 0x1U
+#define STATUS_SEVERITY_WARNING 0x2U
+#define STATUS_SEVERITY_ERROR 0x3U
+#define STATUS_CORE 0x00U
+#define STATUS_MMU 0x01U
+#define STATUS_SCHED 0x02U
+#define STATUS_IPC 0x03U
+#define STATUS_FILESYS 0x04U
+#define STATUS_DRIVER 0x05U
+#define STATUS_NETWORK 0x06U
+#define STATUS_SYSTEM 0x07U
+#define STATUS_SECURITY 0x08U
+#define STATUS_LOADER 0x09U /* lib and driver modules */
+#define STATUS_INTERRUPT 0x0AU
+#define STATUS_TIMER 0x0BU
+#define STATUS_IO 0x0CU
 
 static inline STATUS MAKE_STATUS(const U32 severity, const U32 status_level, const U32 code) {
   const U32 value = ((severity & 0x3U) << 30U) | ((status_level & 0x3FU) << 24U) | (code & 0xFFFFFFU);
